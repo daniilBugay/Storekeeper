@@ -1,6 +1,5 @@
 package technology.desoft.storekeeper.ui.activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.arellomobile.mvp.MvpAppCompatActivity
 import technology.desoft.storekeeper.R

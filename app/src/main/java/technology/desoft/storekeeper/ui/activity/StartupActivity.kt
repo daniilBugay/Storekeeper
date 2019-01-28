@@ -24,11 +24,11 @@ class StartupActivity: MvpAppCompatActivity(), StartupView {
     }
 
     override fun showUserScreen() {
-
+        startActivity<UserActivity>()
     }
 
     override fun showWatcherScreen() {
-
+        startActivity<WatcherActivity>()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
