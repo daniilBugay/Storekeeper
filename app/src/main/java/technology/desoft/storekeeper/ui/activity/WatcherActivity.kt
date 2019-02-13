@@ -14,6 +14,6 @@ class WatcherActivity : MvpAppCompatActivity(), WatcherView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_container)
+        setContentView(R.layout.activity_sign)
     }
 }

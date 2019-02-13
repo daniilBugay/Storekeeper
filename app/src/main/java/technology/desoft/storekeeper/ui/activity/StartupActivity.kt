@@ -1,6 +1,5 @@
 package technology.desoft.storekeeper.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -25,14 +24,16 @@ class StartupActivity: MvpAppCompatActivity(), StartupView {
 
     override fun showUserScreen() {
         startActivity<UserActivity>()
+        finish()
     }
 
     override fun showWatcherScreen() {
         startActivity<WatcherActivity>()
+        finish()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_container)
+        setContentView(R.layout.activity_sign)
     }
 }
