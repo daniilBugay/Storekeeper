@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Storekeeper</string>
+    <string name="base_url">https://stark-hamlet-26364.herokuapp.com/</string>
 </resources>

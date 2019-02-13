@@ -1,3 +1,3 @@
 package technology.desoft.storekeeper.model.item
 
-class ItemType
+data class ItemType(val id: Long, val name: String)
