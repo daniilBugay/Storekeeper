@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Storekeeper</string>
+    <string name="short_app_name">Skeeper</string>
     <string name="base_url">https://stark-hamlet-26364.herokuapp.com/</string>
+    <string name='login'>Login</string>
+    <string name='register'>Register</string>
+    <string name="email">E-MAIL</string>
+    <string name='username'>USERNAME</string>
+    <string name='password'>PASSWORD</string>
+    <string name='confirm_password'>CONFIRM PASSWORD</string>
+    <string name='new_user'>New user?</string>
+    <string name="back_to">Back to</string>
+    <string name="skeeper">I AM SKEEPER!</string>
 </resources>
