@@ -1,6 +1,7 @@
-package technology.desoft.storekeeper.ui.activity
+package technology.desoft.storekeeper.ui
 
 import android.app.Activity
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.support.v4.app.Fragment

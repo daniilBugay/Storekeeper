@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "700033901272",
+    "firebase_url": "https://skeeper-155eb.firebaseio.com",
+    "project_id": "skeeper-155eb",
+    "storage_bucket": "skeeper-155eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:700033901272:android:e179ad92e22c7d48",
+        "android_client_info": {
+          "package_name": "technology.desoft.storekeeper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "700033901272-2qegei1vuilb35jbnurc8bog7ch4q7u6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCG6TzU5jY6GrI0ZGFVIkc5GRjw2Yripss"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

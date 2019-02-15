@@ -6,8 +6,10 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import technology.desoft.storekeeper.R
 import technology.desoft.storekeeper.presentation.presenter.StartupPresenter
 import technology.desoft.storekeeper.presentation.view.StartupView
+import technology.desoft.storekeeper.ui.changeFragment
 import technology.desoft.storekeeper.ui.fragment.LoginFragment
 import technology.desoft.storekeeper.ui.fragment.RegistrationFragment
+import technology.desoft.storekeeper.ui.startActivity
 
 class StartupActivity: MvpAppCompatActivity(), StartupView {
 

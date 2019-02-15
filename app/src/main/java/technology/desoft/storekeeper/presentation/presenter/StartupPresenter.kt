@@ -9,10 +9,14 @@ class StartupPresenter: MvpPresenter<StartupView>(){
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        showLogin()
+        showRegistration()
     }
 
     private fun showLogin(){
         viewState.showLogin()
+    }
+
+    private fun showRegistration(){
+        viewState.showRegistration()
     }
 }
