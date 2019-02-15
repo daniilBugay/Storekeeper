@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import kotlinx.android.synthetic.main.fragment_login.view.*
 import technology.desoft.storekeeper.App
 import technology.desoft.storekeeper.R
 import technology.desoft.storekeeper.presentation.presenter.LoginPresenter
@@ -27,7 +29,18 @@ class LoginFragment: MvpAppCompatFragment(), LoginView {
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
-    override fun showError(message: String) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.loginButton.setOnClickListener { login(view) }
+    }
 
+    private fun login(view: View) {
+        val email = view.loginEmail.text.toString()
+        val password = view.loginPassword.text.toString()
+        loginPresenter.login(email, password)
+    }
+
+    override fun showError(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 }

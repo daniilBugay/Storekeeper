@@ -31,7 +31,7 @@ class App: Application() {
             .baseUrl(getString(R.string.base_url))
             .build()
 
-        userRepository = RetrofitUserRepository(retrofit)
+        userRepository = RetrofitUserRepository(retrofit, resources)
         tokenKeeper = SimpleTokenKeeper()
         userProvider = PreferenceUserProvider(PreferenceManager.getDefaultSharedPreferences(this))
         roomRepository = RetrofitRoomRepository(retrofit, tokenKeeper)

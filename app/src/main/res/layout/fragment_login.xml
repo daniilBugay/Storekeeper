@@ -50,6 +50,7 @@
                     android:layout_marginBottom="@dimen/spacing_mlarge" >
 
                 <android.support.design.widget.TextInputEditText
+                        android:id="@+id/loginEmail"
                         android:theme="@style/InputEditTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -81,6 +82,7 @@
                     android:layout_marginBottom="@dimen/spacing_mlarge" >
 
                 <android.support.design.widget.TextInputEditText
+                        android:id="@+id/loginPassword"
                         android:theme="@style/InputEditTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
