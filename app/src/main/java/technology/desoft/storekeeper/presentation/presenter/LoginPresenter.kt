@@ -9,18 +9,25 @@ import technology.desoft.storekeeper.model.user.login.LoginException
 import technology.desoft.storekeeper.model.user.login.LoginUser
 import technology.desoft.storekeeper.model.user.token.Token
 import technology.desoft.storekeeper.model.user.token.TokenKeeper
+import technology.desoft.storekeeper.navigation.Router
+import technology.desoft.storekeeper.navigation.navigations.RegistrationNavigation
 import technology.desoft.storekeeper.presentation.view.LoginView
+import technology.desoft.storekeeper.presentation.view.StartupView
 
 @InjectViewState
 class LoginPresenter(
     private val userRepository: UserRepository,
     private val tokenKeeper: TokenKeeper,
-    private val userProvider: UserProvider
+    private val userProvider: UserProvider,
+    private val router: Router<StartupView>
 ) : MvpPresenter<LoginView>() {
 
     private val jobs: MutableList<Job> = mutableListOf()
+    private var isLogin = false
 
     fun login(rawEmail: String, rawPassword: String) {
+        if (isLogin) return
+        isLogin = true
         val email = rawEmail.trim()
         val password = rawPassword.trim()
 
@@ -44,6 +51,7 @@ class LoginPresenter(
         val loginResult = userRepository.login(loginUser)
         saveEmailAndPassword(email, password)
         setTokenAndUserId(loginResult.tokenContent, loginResult.userId)
+        isLogin = false
     }
 
     private fun saveEmailAndPassword(email: String, password: String) {
@@ -62,6 +70,11 @@ class LoginPresenter(
         }
         jobs.add(errorJob)
         errorJob.start()
+        isLogin = false
+    }
+
+    fun goToRegistration(){
+        router.navigate(RegistrationNavigation())
     }
 
     override fun onDestroy() {

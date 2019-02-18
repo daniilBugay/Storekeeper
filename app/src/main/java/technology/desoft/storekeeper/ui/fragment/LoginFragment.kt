@@ -21,7 +21,7 @@ class LoginFragment: MvpAppCompatFragment(), LoginView {
     @ProvidePresenter
     fun providePresenter(): LoginPresenter {
         return with(activity?.application as App) {
-            LoginPresenter(userRepository, tokenKeeper, userProvider)
+            LoginPresenter(userRepository, tokenKeeper, userProvider, startupRouter)
         }
     }
 
@@ -32,9 +32,11 @@ class LoginFragment: MvpAppCompatFragment(), LoginView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.loginButton.setOnClickListener { login(view) }
+        view.registerLabel.setOnClickListener { loginPresenter.goToRegistration() }
     }
 
     private fun login(view: View) {
+        showProgress()
         val email = view.loginEmail.text.toString()
         val password = view.loginPassword.text.toString()
         loginPresenter.login(email, password)
@@ -42,5 +44,14 @@ class LoginFragment: MvpAppCompatFragment(), LoginView {
 
     override fun showError(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+        hideProgress()
+    }
+
+    private fun showProgress(){
+        view?.loginProgressIndicator?.visibility = View.VISIBLE
+    }
+
+    private fun hideProgress(){
+        view?.loginProgressIndicator?.visibility = View.GONE
     }
 }

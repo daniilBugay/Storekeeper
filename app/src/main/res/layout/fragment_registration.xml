@@ -11,6 +11,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+        <ProgressBar
+                android:id="@+id/registerProgressIndicator"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:indeterminate="true"
+                android:progressTint="@color/colorPrimary"
+                android:indeterminateTint="@color/colorPrimary"/>
+
         <LinearLayout
                 android:layout_width="330dp"
                 android:layout_height="wrap_content"
@@ -20,6 +30,7 @@
                 android:padding="@dimen/spacing_large">
 
             <TextView
+                    android:id="@+id/registerLogo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -27,7 +38,8 @@
                     android:textSize="50sp"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimary"
-                    android:layout_marginBottom="@dimen/spacing_xlarge" />
+                    android:layout_marginBottom="@dimen/spacing_xlarge"
+                    android:transitionName="signLogo"/>
 
             <TextView
                     android:layout_width="wrap_content"
@@ -145,7 +157,8 @@
                     app:cornerRadius="28dp"
                     app:rippleColor="@color/colorPrimaryDark"
                     android:clickable="true"
-                    android:focusable="true"/>
+                    android:focusable="true"
+                    android:transitionName="signButton"/>
 
             <LinearLayout
                     android:layout_width="match_parent"
