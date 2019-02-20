@@ -39,11 +39,11 @@ class App: Application() {
     }
 
     private fun initComponents(retrofit: Retrofit) {
-        userRepository = RetrofitUserRepository(retrofit, resources)
         tokenKeeper = SimpleTokenKeeper()
         userProvider = PreferenceUserProvider(PreferenceManager.getDefaultSharedPreferences(this))
-        roomRepository = RetrofitRoomRepository(retrofit, tokenKeeper)
-        itemRepository = RetrofitItemRepository(retrofit, tokenKeeper)
         startupRouter = SimpleRouter()
+        userRepository = RetrofitUserRepository(retrofit, resources)
+        roomRepository = RetrofitRoomRepository(retrofit, tokenKeeper, resources)
+        itemRepository = RetrofitItemRepository(retrofit, tokenKeeper, resources)
     }
 }
