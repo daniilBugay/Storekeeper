@@ -1,12 +1,12 @@
 package technology.desoft.storekeeper.presentation.presenter
 
-import android.widget.CheckBox
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import technology.desoft.storekeeper.model.user.UserRepository
-import technology.desoft.storekeeper.model.user.login.LoginException
-import technology.desoft.storekeeper.model.user.login.LoginUser
 import technology.desoft.storekeeper.model.user.registration.RegistrationException
 import technology.desoft.storekeeper.model.user.registration.RegistrationUser
 import technology.desoft.storekeeper.navigation.Router
@@ -47,6 +47,7 @@ class RegistrationPresenter(
     private suspend fun tryRegister(email: String, username: String, password: String, isKeeper: Boolean){
         val registrationUser = RegistrationUser(email, password, username, isKeeper)
         userRepository.registration(registrationUser)
+        goToLogin()
     }
 
     private fun processError(e: RegistrationException){

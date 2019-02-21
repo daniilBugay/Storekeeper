@@ -54,7 +54,7 @@ class LoginPresenter(
         saveEmailAndPassword(email, password)
         setTokenAndUserId(loginResult.tokenContent, loginResult.userId)
         isLogin = false
-        if (!loginResult.isKeeper)
+        if (loginResult.isKeeper)
             router.navigate(WatcherScreenNavigation())
         else
             router.navigate(UserScreenNavigation())
