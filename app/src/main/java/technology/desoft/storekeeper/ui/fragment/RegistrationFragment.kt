@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -15,7 +16,6 @@ import technology.desoft.storekeeper.presentation.presenter.RegistrationPresente
 import technology.desoft.storekeeper.presentation.view.RegistrationView
 
 class RegistrationFragment: MvpAppCompatFragment(), RegistrationView {
-
     @InjectPresenter
     lateinit var registrationPresenter: RegistrationPresenter
 
@@ -33,16 +33,21 @@ class RegistrationFragment: MvpAppCompatFragment(), RegistrationView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.loginLabel.setOnClickListener { registrationPresenter.goToLogin() }
-        view.registerButton.setOnClickListener { registration() }
+        view.registerButton.setOnClickListener { registration(view) }
     }
 
     override fun showError(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
         hideProgress()
     }
 
-    private fun registration(){
+    private fun registration(view: View){
         showProgress()
-        
+        val email = view.registrationEmail.text.toString()
+        val username = view.registrationUsername.text.toString()
+        val password = view.registrationPassword.text.toString()
+        val isKeeper = view.checkbox.isChecked
+        registrationPresenter.register(email, username, password, isKeeper)
     }
 
     private fun showProgress(){

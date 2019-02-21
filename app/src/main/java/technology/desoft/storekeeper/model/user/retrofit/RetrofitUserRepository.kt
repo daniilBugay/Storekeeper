@@ -32,7 +32,7 @@ class RetrofitUserRepository(retrofit: Retrofit, private val resources: Resource
             val body = response.body()
             if (response.isSuccessful && body != null)
                 return body
-            throw RegistrationException(response.message())
+            throw RegistrationException(resources.getString(R.string.registration_error))
         } catch (e: UnknownHostException) {
             throw RegistrationException(resources.getString(R.string.connection_error))
         }

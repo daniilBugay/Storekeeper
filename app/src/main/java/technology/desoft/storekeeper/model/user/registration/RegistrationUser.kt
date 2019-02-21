@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class RegistrationUser(
     val email: String,
     val password: String,
-    val name: String,
+    val username: String,
     @SerializedName("is_keeper")
     val isKeeper: Boolean
 )
