@@ -11,6 +11,8 @@ import technology.desoft.storekeeper.model.user.token.Token
 import technology.desoft.storekeeper.model.user.token.TokenKeeper
 import technology.desoft.storekeeper.navigation.Router
 import technology.desoft.storekeeper.navigation.navigations.RegistrationNavigation
+import technology.desoft.storekeeper.navigation.navigations.UserScreenNavigation
+import technology.desoft.storekeeper.navigation.navigations.WatcherScreenNavigation
 import technology.desoft.storekeeper.presentation.view.LoginView
 import technology.desoft.storekeeper.presentation.view.StartupView
 
@@ -52,6 +54,10 @@ class LoginPresenter(
         saveEmailAndPassword(email, password)
         setTokenAndUserId(loginResult.tokenContent, loginResult.userId)
         isLogin = false
+        if (!loginResult.isKeeper)
+            router.navigate(WatcherScreenNavigation())
+        else
+            router.navigate(UserScreenNavigation())
     }
 
     private fun saveEmailAndPassword(email: String, password: String) {

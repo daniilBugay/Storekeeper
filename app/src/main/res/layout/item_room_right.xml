@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_margin="16dp">
+
+    <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:layout_gravity="center">
+
+        <TextView
+                android:id="@+id/roomNumberText"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+        <nl.dionsegijn.steppertouch.StepperTouch
+                android:id="@+id/roomAmountStepper"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="2">
+
+        </nl.dionsegijn.steppertouch.StepperTouch>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+</android.support.design.card.MaterialCardView>

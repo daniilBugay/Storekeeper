@@ -1,6 +1,15 @@
 package technology.desoft.storekeeper.presentation.view
 
 import com.arellomobile.mvp.MvpView
+import com.arellomobile.mvp.viewstate.strategy.SingleStateStrategy
+import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
+import technology.desoft.storekeeper.model.item.Item
+import technology.desoft.storekeeper.model.item.ItemType
+import technology.desoft.storekeeper.model.room.Room
 
+@StateStrategyType(SingleStateStrategy::class)
 interface WatcherView: MvpView {
+    fun showItemTypes(itemTypes: List<ItemType>)
+    fun showError(message: String)
+    fun showItemsWithRoom(roomsAndItems: List<Pair<Room, Item>>)
 }

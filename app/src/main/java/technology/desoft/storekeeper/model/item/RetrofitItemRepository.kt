@@ -36,9 +36,9 @@ class RetrofitItemRepository(
         }
     }
 
-    override suspend fun changeItemAmount(item: Item, newAmount: Double) {
+    override suspend fun changeItem(item: Item) {
         try {
-            val response = api.changeItem(item.copy(amount = newAmount)).await()
+            val response = api.changeItem(item).await()
             if (!response.isSuccessful)
                 throw IllegalAccessException(resources.getString(R.string.change_item_error))
         } catch (e: UnknownHostException){
