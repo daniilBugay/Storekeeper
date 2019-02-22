@@ -2,7 +2,6 @@ package technology.desoft.storekeeper.ui.activity
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.widget.LinearLayout
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -13,11 +12,11 @@ import technology.desoft.storekeeper.R
 import technology.desoft.storekeeper.model.item.Item
 import technology.desoft.storekeeper.model.item.ItemType
 import technology.desoft.storekeeper.model.room.Room
-import technology.desoft.storekeeper.model.user.UserRepository
 import technology.desoft.storekeeper.presentation.presenter.UserPresenter
 import technology.desoft.storekeeper.presentation.view.UserView
 import technology.desoft.storekeeper.ui.adapter.ItemRightAdapter
 import technology.desoft.storekeeper.ui.adapter.RoomLeftAdapter
+import technology.desoft.storekeeper.ui.startActivity
 
 class UserActivity : MvpAppCompatActivity(), UserView {
 
@@ -27,7 +26,7 @@ class UserActivity : MvpAppCompatActivity(), UserView {
     @ProvidePresenter
     fun providePresenter(): UserPresenter {
         return with(application as App){
-            UserPresenter(itemRepository, roomRepository)
+            UserPresenter(itemRepository, roomRepository, userProvider)
         }
     }
 
@@ -41,6 +40,7 @@ class UserActivity : MvpAppCompatActivity(), UserView {
         userRightRecycler.layoutManager = LinearLayoutManager(
             this, LinearLayoutManager.VERTICAL, false
         )
+        userLogoutButton.setOnClickListener { userPresenter.onLogout() }
     }
 
     override fun showRooms(rooms: List<Room>) {
@@ -59,5 +59,10 @@ class UserActivity : MvpAppCompatActivity(), UserView {
 
     override fun showError(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun logout() {
+        startActivity<StartupActivity>()
+        finish()
     }
 }

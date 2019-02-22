@@ -9,4 +9,5 @@ interface UserView: MvpView {
     fun showError(message: String)
     fun showItemsWithType(itemsAndTypes: List<Pair<Item, ItemType>>)
     fun showRooms(rooms: List<Room>)
+    fun logout()
 }

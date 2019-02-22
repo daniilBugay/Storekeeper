@@ -14,3 +14,7 @@ fun UserProvider.saveEmailAndPassword(email: String, password: String) {
     saveUserEmail(email)
     saveUserPassword(password)
 }
+
+fun UserProvider.getEmailAndPassword(): Pair<String?, String?> {
+    return loadUserEmail() to loadUserPassword()
+}

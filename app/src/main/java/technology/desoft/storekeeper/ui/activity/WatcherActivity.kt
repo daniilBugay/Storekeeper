@@ -16,6 +16,7 @@ import technology.desoft.storekeeper.presentation.presenter.WatcherPresenter
 import technology.desoft.storekeeper.presentation.view.WatcherView
 import technology.desoft.storekeeper.ui.adapter.ItemLeftAdapter
 import technology.desoft.storekeeper.ui.adapter.RoomRightAdapter
+import technology.desoft.storekeeper.ui.startActivity
 
 class WatcherActivity : MvpAppCompatActivity(), WatcherView {
 
@@ -25,7 +26,7 @@ class WatcherActivity : MvpAppCompatActivity(), WatcherView {
     @ProvidePresenter
     fun providePresenter(): WatcherPresenter {
         return with(application as App){
-            WatcherPresenter(itemRepository, roomRepository)
+            WatcherPresenter(itemRepository, roomRepository, userProvider)
         }
     }
 
@@ -38,6 +39,7 @@ class WatcherActivity : MvpAppCompatActivity(), WatcherView {
         watcherRightRecycler.layoutManager = LinearLayoutManager(
             this, LinearLayoutManager.VERTICAL, false
         )
+        watcherLogoutButton.setOnClickListener { watcherPresenter.onLogout() }
     }
 
     override fun showItemTypes(itemTypes: List<ItemType>) {
@@ -56,5 +58,10 @@ class WatcherActivity : MvpAppCompatActivity(), WatcherView {
 
     override fun showError(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun logout() {
+        startActivity<StartupActivity>()
+        finish()
     }
 }

@@ -20,7 +20,7 @@ class RetrofitUserRepository(retrofit: Retrofit, private val resources: Resource
     }
 
     override suspend fun login(loginUser: LoginUser): AuthResult {
-        return loginWithRepeating(loginUser, 3)
+        return loginWithRepeating(loginUser, REPEAT_COUNT)
     }
 
     private suspend fun loginWithRepeating(loginUser: LoginUser, repeatCount: Int): AuthResult {

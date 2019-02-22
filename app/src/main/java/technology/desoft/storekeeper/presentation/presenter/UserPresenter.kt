@@ -11,13 +11,15 @@ import technology.desoft.storekeeper.model.item.ItemRepository
 import technology.desoft.storekeeper.model.item.ItemType
 import technology.desoft.storekeeper.model.room.Room
 import technology.desoft.storekeeper.model.room.RoomRepository
+import technology.desoft.storekeeper.model.user.UserProvider
 import technology.desoft.storekeeper.presentation.view.UserView
 import java.io.IOException
 
 @InjectViewState
 class UserPresenter(
     private val itemRepository: ItemRepository,
-    private val roomRepository: RoomRepository
+    private val roomRepository: RoomRepository,
+    private val userProvider: UserProvider
 ): MvpPresenter<UserView>() {
 
     private val jobs = mutableListOf<Job>()
@@ -81,5 +83,10 @@ class UserPresenter(
         return GlobalScope.launch {
             itemRepository.changeItem(item)
         }
+    }
+
+    fun onLogout(){
+        userProvider.clear()
+        viewState.logout()
     }
 }

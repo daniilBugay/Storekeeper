@@ -24,7 +24,7 @@ class StartupActivity: MvpAppCompatActivity(), StartupView {
     @ProvidePresenter
     fun providePresenter(): StartupPresenter {
         return with(application as App){
-            StartupPresenter(startupRouter)
+            StartupPresenter(startupRouter, userRepository, userProvider, tokenKeeper)
         }
     }
 
