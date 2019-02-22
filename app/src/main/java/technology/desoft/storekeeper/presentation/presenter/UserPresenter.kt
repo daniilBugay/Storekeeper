@@ -36,6 +36,7 @@ class UserPresenter(
             try {
                 val rooms = roomRepository.getRooms()
                 launch(Dispatchers.Main) { viewState.showRooms(rooms) }
+                rooms.firstOrNull()?.let { onRoomSelected(it) }
             } catch (e: IOException) {
                 launch(Dispatchers.Main) { processError(e) }
             }

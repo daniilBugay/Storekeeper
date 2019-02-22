@@ -36,6 +36,7 @@ class WatcherPresenter(
             try {
                 val types = itemRepository.getItemTypes()
                 launch(Dispatchers.Main) { viewState.showItemTypes(types) }
+                types.firstOrNull()?.let { onItemTypeSelect(it) }
             } catch (e: IOException){
                 launch(Dispatchers.Main) { processError(e) }
             }
