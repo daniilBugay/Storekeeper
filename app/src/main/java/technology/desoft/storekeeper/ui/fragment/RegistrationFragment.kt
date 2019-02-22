@@ -22,7 +22,7 @@ class RegistrationFragment: MvpAppCompatFragment(), RegistrationView {
     @ProvidePresenter
     fun providePresenter(): RegistrationPresenter {
         return with(activity?.application as App){
-            RegistrationPresenter(userRepository, startupRouter)
+            RegistrationPresenter(userRepository, tokenKeeper, userProvider, startupRouter)
         }
     }
 

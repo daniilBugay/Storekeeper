@@ -9,3 +9,8 @@ interface UserProvider {
 
     fun clear()
 }
+
+fun UserProvider.saveEmailAndPassword(email: String, password: String) {
+    saveUserEmail(email)
+    saveUserPassword(password)
+}

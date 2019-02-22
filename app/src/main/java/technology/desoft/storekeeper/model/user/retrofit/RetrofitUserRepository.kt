@@ -16,6 +16,8 @@ class RetrofitUserRepository(retrofit: Retrofit, private val resources: Resource
 
     override suspend fun login(loginUser: LoginUser): AuthResult {
         try {
+            if (loginUser.email.isBlank() || loginUser.password.isBlank())
+                throw LoginException(resources.getString(R.string.fields_empty_error))
             val response = api.login(loginUser).await()
             val body = response.body()
             if (response.isSuccessful && body != null)
@@ -28,6 +30,12 @@ class RetrofitUserRepository(retrofit: Retrofit, private val resources: Resource
 
     override suspend fun registration(registrationUser: RegistrationUser): AuthResult {
         try {
+            if (
+                registrationUser.email.isBlank() ||
+                registrationUser.password.isBlank() ||
+                registrationUser.username.isBlank()
+            ) throw RegistrationException(resources.getString(R.string.fields_empty_error))
+
             val response = api.registration(registrationUser).await()
             val body = response.body()
             if (response.isSuccessful && body != null)

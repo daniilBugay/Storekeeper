@@ -7,8 +7,10 @@ import technology.desoft.storekeeper.model.user.UserProvider
 import technology.desoft.storekeeper.model.user.UserRepository
 import technology.desoft.storekeeper.model.user.login.LoginException
 import technology.desoft.storekeeper.model.user.login.LoginUser
+import technology.desoft.storekeeper.model.user.saveEmailAndPassword
 import technology.desoft.storekeeper.model.user.token.Token
 import technology.desoft.storekeeper.model.user.token.TokenKeeper
+import technology.desoft.storekeeper.model.user.token.setTokenAndUserId
 import technology.desoft.storekeeper.navigation.Router
 import technology.desoft.storekeeper.navigation.navigations.RegistrationNavigation
 import technology.desoft.storekeeper.navigation.navigations.UserScreenNavigation
@@ -51,23 +53,13 @@ class LoginPresenter(
     private suspend fun tryLogin(email: String, password: String) {
         val loginUser = LoginUser(email, password)
         val loginResult = userRepository.login(loginUser)
-        saveEmailAndPassword(email, password)
-        setTokenAndUserId(loginResult.tokenContent, loginResult.userId)
+        userProvider.saveEmailAndPassword(email, password)
+        tokenKeeper.setTokenAndUserId(loginResult.tokenContent, loginResult.userId)
         isLogin = false
         if (loginResult.isKeeper)
             router.navigate(WatcherScreenNavigation())
         else
             router.navigate(UserScreenNavigation())
-    }
-
-    private fun saveEmailAndPassword(email: String, password: String) {
-        userProvider.saveUserEmail(email)
-        userProvider.saveUserPassword(password)
-    }
-
-    private fun setTokenAndUserId(tokenContent: String, userId: Long) {
-        tokenKeeper.setToken(Token(tokenContent))
-        tokenKeeper.setUserId(userId)
     }
 
     private fun processError(e: LoginException) {

@@ -12,7 +12,8 @@
     <string name="back_to">Back to</string>
     <string name="skeeper">I AM SKEEPER!</string>
     <string name="invalid_login_error">Invalid login or password</string>
-    <string name="registration_error">"User with this email already exists!"</string>>
+    <string name="registration_error">"User with this email already exists!"</string>
+    <string name="fields_empty_error">Fill in required fields</string>
     <string name="connection_error">Network connection error</string>
     <string name="change_item_error">Could not change item</string>
 </resources>
