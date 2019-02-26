@@ -1,12 +1,16 @@
-package technology.desoft.storekeeper.ui.activity
+package technology.desoft.storekeeper.ui.fragment
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import com.arellomobile.mvp.MvpAppCompatActivity
+import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import kotlinx.android.synthetic.main.activity_watcher.*
+import kotlinx.android.synthetic.main.fragment_watcher.*
+import kotlinx.android.synthetic.main.toolbar_default.*
 import technology.desoft.storekeeper.App
 import technology.desoft.storekeeper.R
 import technology.desoft.storekeeper.model.item.Item
@@ -14,32 +18,36 @@ import technology.desoft.storekeeper.model.item.ItemType
 import technology.desoft.storekeeper.model.room.Room
 import technology.desoft.storekeeper.presentation.presenter.WatcherPresenter
 import technology.desoft.storekeeper.presentation.view.WatcherView
+import technology.desoft.storekeeper.ui.activity.MainActivity
 import technology.desoft.storekeeper.ui.adapter.ItemLeftAdapter
 import technology.desoft.storekeeper.ui.adapter.RoomRightAdapter
 import technology.desoft.storekeeper.ui.startActivity
 
-class WatcherActivity : MvpAppCompatActivity(), WatcherView {
+class WatcherFragment : MvpAppCompatFragment(), WatcherView {
 
     @InjectPresenter
     lateinit var watcherPresenter: WatcherPresenter
 
     @ProvidePresenter
     fun providePresenter(): WatcherPresenter {
-        return with(application as App){
+        return with(activity?.application as App){
             WatcherPresenter(itemRepository, roomRepository, userProvider)
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_watcher)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_watcher, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         watcherLeftRecycler.layoutManager = LinearLayoutManager(
-            this, LinearLayoutManager.VERTICAL, false
+            context, LinearLayoutManager.VERTICAL, false
         )
         watcherRightRecycler.layoutManager = LinearLayoutManager(
-            this, LinearLayoutManager.VERTICAL, false
+            context, LinearLayoutManager.VERTICAL, false
         )
-        watcherLogoutButton.setOnClickListener { watcherPresenter.onLogout() }
+        logoutButton.setOnClickListener { watcherPresenter.onLogout() }
     }
 
     override fun showItemTypes(itemTypes: List<ItemType>) {
@@ -57,11 +65,11 @@ class WatcherActivity : MvpAppCompatActivity(), WatcherView {
     }
 
     override fun showError(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
     override fun logout() {
-        startActivity<StartupActivity>()
-        finish()
+        activity?.startActivity<MainActivity>()
+        activity?.finish()
     }
 }

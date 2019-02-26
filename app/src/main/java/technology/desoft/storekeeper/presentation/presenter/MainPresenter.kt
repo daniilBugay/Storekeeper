@@ -18,7 +18,7 @@ import technology.desoft.storekeeper.navigation.navigations.WatcherScreenNavigat
 import technology.desoft.storekeeper.presentation.view.StartupView
 
 @InjectViewState
-class StartupPresenter(
+class MainPresenter(
     router: Router<StartupView>,
     private val userRepository: UserRepository,
     private val provider: UserProvider,
@@ -48,9 +48,9 @@ class StartupPresenter(
             val result = userRepository.login(LoginUser(email, password))
             tokenKeeper.setTokenAndUserId(result.tokenContent, result.userId)
             if (result.isKeeper)
-                viewState.showWatcherScreen()
+                showWatcherScreen()
             else
-                viewState.showUserScreen()
+                showUserScreen()
         }
     }
 
@@ -60,6 +60,18 @@ class StartupPresenter(
 
     private fun showRegistration(){
         viewState.showRegistration()
+    }
+
+    private fun showWatcherScreen(){
+        GlobalScope.launch(Dispatchers.Main){
+            viewState.showWatcherScreen()
+        }
+    }
+
+    private fun showUserScreen(){
+        GlobalScope.launch(Dispatchers.Main){
+            viewState.showUserScreen()
+        }
     }
 
     override fun onDestroy() {

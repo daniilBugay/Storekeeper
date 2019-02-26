@@ -1,12 +1,16 @@
-package technology.desoft.storekeeper.ui.activity
+package technology.desoft.storekeeper.ui.fragment
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import com.arellomobile.mvp.MvpAppCompatActivity
+import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import kotlinx.android.synthetic.main.activity_user.*
+import kotlinx.android.synthetic.main.fragment_user.*
+import kotlinx.android.synthetic.main.toolbar_default.*
 import technology.desoft.storekeeper.App
 import technology.desoft.storekeeper.R
 import technology.desoft.storekeeper.model.item.Item
@@ -14,33 +18,36 @@ import technology.desoft.storekeeper.model.item.ItemType
 import technology.desoft.storekeeper.model.room.Room
 import technology.desoft.storekeeper.presentation.presenter.UserPresenter
 import technology.desoft.storekeeper.presentation.view.UserView
+import technology.desoft.storekeeper.ui.activity.MainActivity
 import technology.desoft.storekeeper.ui.adapter.ItemRightAdapter
 import technology.desoft.storekeeper.ui.adapter.RoomLeftAdapter
 import technology.desoft.storekeeper.ui.startActivity
 
-class UserActivity : MvpAppCompatActivity(), UserView {
+class UserFragment : MvpAppCompatFragment(), UserView {
 
     @InjectPresenter
     lateinit var userPresenter: UserPresenter
 
     @ProvidePresenter
     fun providePresenter(): UserPresenter {
-        return with(application as App){
+        return with(activity?.application as App){
             UserPresenter(itemRepository, roomRepository, userProvider)
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_user, container, false)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         userLeftRecycler.layoutManager = LinearLayoutManager(
-            this, LinearLayoutManager.VERTICAL, false
+            context, LinearLayoutManager.VERTICAL, false
         )
         userRightRecycler.layoutManager = LinearLayoutManager(
-            this, LinearLayoutManager.VERTICAL, false
+            context, LinearLayoutManager.VERTICAL, false
         )
-        userLogoutButton.setOnClickListener { userPresenter.onLogout() }
+        logoutButton.setOnClickListener { userPresenter.onLogout() }
     }
 
     override fun showRooms(rooms: List<Room>) {
@@ -58,11 +65,11 @@ class UserActivity : MvpAppCompatActivity(), UserView {
     }
 
     override fun showError(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
     override fun logout() {
-        startActivity<StartupActivity>()
-        finish()
+        activity?.startActivity<MainActivity>()
+        activity?.finish()
     }
 }

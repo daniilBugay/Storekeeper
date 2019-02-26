@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" android:background="@color/colorPrimaryDark">
+
+    <TextView
+            android:transitionName="signLogo"
+            android:textColor="@color/colorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@string/short_app_name"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+            android:layout_gravity="start|center_vertical"/>
+
+    <ImageButton
+            android:id="@+id/logoutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_logout"
+            android:tint="@color/colorPrimary"
+            android:layout_margin="16dp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_gravity="end|center_vertical"/>
+
+</FrameLayout>

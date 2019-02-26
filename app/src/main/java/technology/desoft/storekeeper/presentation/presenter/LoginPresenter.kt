@@ -57,9 +57,21 @@ class LoginPresenter(
         tokenKeeper.setTokenAndUserId(loginResult.tokenContent, loginResult.userId)
         isLogin = false
         if (loginResult.isKeeper)
-            router.navigate(WatcherScreenNavigation())
+            showWatcherScreen()
         else
+            showUserScreen()
+    }
+
+    private fun showWatcherScreen() {
+        GlobalScope.launch(Dispatchers.Main) {
+            router.navigate(WatcherScreenNavigation())
+        }
+    }
+
+    private fun showUserScreen() {
+        GlobalScope.launch(Dispatchers.Main) {
             router.navigate(UserScreenNavigation())
+        }
     }
 
     private fun processError(e: LoginException) {

@@ -8,30 +8,33 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import technology.desoft.storekeeper.App
 import technology.desoft.storekeeper.R
-import technology.desoft.storekeeper.presentation.presenter.StartupPresenter
+import technology.desoft.storekeeper.presentation.presenter.MainPresenter
 import technology.desoft.storekeeper.presentation.view.StartupView
+import technology.desoft.storekeeper.ui.changeFragment
 import technology.desoft.storekeeper.ui.changeFragmentWithTransition
 import technology.desoft.storekeeper.ui.fragment.LoginFragment
 import technology.desoft.storekeeper.ui.fragment.RegistrationFragment
+import technology.desoft.storekeeper.ui.fragment.UserFragment
+import technology.desoft.storekeeper.ui.fragment.WatcherFragment
 import technology.desoft.storekeeper.ui.startActivity
 
 
-class StartupActivity: MvpAppCompatActivity(), StartupView {
+class MainActivity : MvpAppCompatActivity(), StartupView {
 
     @InjectPresenter
-    lateinit var startupPresenter: StartupPresenter
+    lateinit var mainPresenter: MainPresenter
 
     @ProvidePresenter
-    fun providePresenter(): StartupPresenter {
-        return with(application as App){
-            StartupPresenter(startupRouter, userRepository, userProvider, tokenKeeper)
+    fun providePresenter(): MainPresenter {
+        return with(application as App) {
+            MainPresenter(startupRouter, userRepository, userProvider, tokenKeeper)
         }
     }
 
     override fun showLogin() {
         val current = supportFragmentManager.fragments.firstOrNull()
         val loginFragment = LoginFragment()
-        changeFragmentWithTransition(loginFragment){
+        changeFragmentWithTransition(loginFragment) {
             val button = current?.view?.findViewById<View>(R.id.registerButton)
             val logo = current?.view?.findViewById<View>(R.id.registerLogo)
             if (button != null && logo != null) {
@@ -45,7 +48,7 @@ class StartupActivity: MvpAppCompatActivity(), StartupView {
     override fun showRegistration() {
         val current = supportFragmentManager.fragments.firstOrNull()
         val registerFragment = RegistrationFragment()
-        changeFragmentWithTransition(registerFragment){
+        changeFragmentWithTransition(registerFragment) {
             val button = current?.view?.findViewById<View>(R.id.loginButton)
             val logo = current?.view?.findViewById<View>(R.id.loginLogo)
             if (button != null && logo != null) {
@@ -57,13 +60,11 @@ class StartupActivity: MvpAppCompatActivity(), StartupView {
     }
 
     override fun showUserScreen() {
-        startActivity<UserActivity>()
-        finish()
+        changeFragment(UserFragment()){}
     }
 
     override fun showWatcherScreen() {
-        startActivity<WatcherActivity>()
-        finish()
+        changeFragment(WatcherFragment()){}
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
