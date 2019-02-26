@@ -1,7 +1,10 @@
 package technology.desoft.storekeeper.ui.activity
 
 import android.os.Bundle
+import android.transition.Explode
 import android.transition.Fade
+import android.transition.Slide
+import android.view.Gravity
 import android.view.View
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -60,11 +63,31 @@ class MainActivity : MvpAppCompatActivity(), StartupView {
     }
 
     override fun showUserScreen() {
-        changeFragment(UserFragment()){}
+        val current = supportFragmentManager.fragments.firstOrNull()
+        val userFragment = UserFragment()
+        changeFragmentWithTransition(userFragment){
+            val logo = current?.view?.findViewById(R.id.loginLogo)
+                ?: current?.view?.findViewById<View>(R.id.registerLogo)
+            if (logo != null){
+                addSharedElement(logo, logo.transitionName)
+            }
+            userFragment.enterTransition = Explode()
+            current?.exitTransition = Slide(Gravity.BOTTOM)
+        }
     }
 
     override fun showWatcherScreen() {
-        changeFragment(WatcherFragment()){}
+        val current = supportFragmentManager.fragments.firstOrNull()
+        val watcherFragment = WatcherFragment()
+        changeFragmentWithTransition(watcherFragment){
+            val logo = current?.view?.findViewById(R.id.loginLogo)
+                ?: current?.view?.findViewById<View>(R.id.registerLogo)
+            if (logo != null){
+                addSharedElement(logo, logo.transitionName)
+            }
+            watcherFragment.enterTransition = Explode()
+            current?.exitTransition = Slide(Gravity.BOTTOM)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
