@@ -26,6 +26,7 @@
                 android:layout_weight="3">
 
         </nl.dionsegijn.steppertouch.StepperTouch>
+
     </android.support.v7.widget.LinearLayoutCompat>
 
 </android.support.design.card.MaterialCardView>

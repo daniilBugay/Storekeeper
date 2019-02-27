@@ -13,13 +13,11 @@ import technology.desoft.storekeeper.App
 import technology.desoft.storekeeper.R
 import technology.desoft.storekeeper.presentation.presenter.MainPresenter
 import technology.desoft.storekeeper.presentation.view.StartupView
-import technology.desoft.storekeeper.ui.changeFragment
 import technology.desoft.storekeeper.ui.changeFragmentWithTransition
 import technology.desoft.storekeeper.ui.fragment.LoginFragment
 import technology.desoft.storekeeper.ui.fragment.RegistrationFragment
 import technology.desoft.storekeeper.ui.fragment.UserFragment
 import technology.desoft.storekeeper.ui.fragment.WatcherFragment
-import technology.desoft.storekeeper.ui.startActivity
 
 
 class MainActivity : MvpAppCompatActivity(), StartupView {
@@ -92,6 +90,6 @@ class MainActivity : MvpAppCompatActivity(), StartupView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign)
+        setContentView(R.layout.activity_main)
     }
 }

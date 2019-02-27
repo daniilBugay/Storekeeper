@@ -4,4 +4,5 @@ import com.arellomobile.mvp.MvpView
 
 interface RegistrationView: MvpView {
     fun showError(message: String)
+    fun showSuccess(message: String)
 }

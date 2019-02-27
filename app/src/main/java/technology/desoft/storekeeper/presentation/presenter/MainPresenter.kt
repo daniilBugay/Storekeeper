@@ -13,8 +13,6 @@ import technology.desoft.storekeeper.model.user.login.LoginUser
 import technology.desoft.storekeeper.model.user.token.TokenKeeper
 import technology.desoft.storekeeper.model.user.token.setTokenAndUserId
 import technology.desoft.storekeeper.navigation.Router
-import technology.desoft.storekeeper.navigation.navigations.UserScreenNavigation
-import technology.desoft.storekeeper.navigation.navigations.WatcherScreenNavigation
 import technology.desoft.storekeeper.presentation.view.StartupView
 
 @InjectViewState

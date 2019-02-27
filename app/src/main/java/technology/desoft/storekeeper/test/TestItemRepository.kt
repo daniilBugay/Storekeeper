@@ -20,7 +20,7 @@ class TestItemRepository : ItemRepository {
     }
 
     override suspend fun getItemTypes(): List<ItemType> {
-        val image = "https://www.andrey-andreev.com/wp-content/uploads/2018/03/Funny-Cookies-Sweetness-Joker-Delicious-Food-3114974.jpg"
+        val image = "http://www.pngall.com/wp-content/uploads/2016/07/Cookie-PNG.png"
 
         return List(10) {
             ItemType(it.toLong(), "Cookies", image)

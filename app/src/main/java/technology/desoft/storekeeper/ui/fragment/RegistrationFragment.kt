@@ -41,6 +41,10 @@ class RegistrationFragment: MvpAppCompatFragment(), RegistrationView {
         hideProgress()
     }
 
+    override fun showSuccess(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+    }
+
     private fun registration(view: View){
         showProgress()
         val email = view.registrationEmail.text.toString()
@@ -48,6 +52,7 @@ class RegistrationFragment: MvpAppCompatFragment(), RegistrationView {
         val password = view.registrationPassword.text.toString()
         val isKeeper = view.checkbox.isChecked
         registrationPresenter.register(email, username, password, isKeeper)
+
     }
 
     private fun showProgress(){
