@@ -63,7 +63,7 @@ class MainActivity : MvpAppCompatActivity(), StartupView {
     override fun showUserScreen() {
         val current = supportFragmentManager.fragments.firstOrNull()
         val userFragment = UserFragment()
-        changeFragmentWithTransition(userFragment){
+        changeFragmentWithTransition(userFragment, 500L){
             val logo = current?.view?.findViewById(R.id.loginLogo)
                 ?: current?.view?.findViewById<View>(R.id.registerLogo)
             if (logo != null){
@@ -77,7 +77,7 @@ class MainActivity : MvpAppCompatActivity(), StartupView {
     override fun showWatcherScreen() {
         val current = supportFragmentManager.fragments.firstOrNull()
         val watcherFragment = WatcherFragment()
-        changeFragmentWithTransition(watcherFragment){
+        changeFragmentWithTransition(watcherFragment, 500L){
             val logo = current?.view?.findViewById(R.id.loginLogo)
                 ?: current?.view?.findViewById<View>(R.id.registerLogo)
             if (logo != null){

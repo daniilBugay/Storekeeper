@@ -13,5 +13,6 @@ interface WatcherView: MvpView {
     fun showItemTypes(itemTypes: List<ItemType>)
     fun showError(message: String)
     fun showItemsWithRoom(roomsAndItems: List<Pair<Room, Item>>)
+    fun showLoading()
     fun logout()
 }

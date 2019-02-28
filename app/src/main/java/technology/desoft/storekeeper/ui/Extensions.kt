@@ -18,10 +18,14 @@ inline fun AppCompatActivity.changeFragment(fragment: Fragment, body: FragmentTr
         .commit()
 }
 
-inline fun AppCompatActivity.changeFragmentWithTransition(fragment: Fragment, body: FragmentTransaction.() -> Unit) {
+inline fun AppCompatActivity.changeFragmentWithTransition(
+    fragment: Fragment,
+    duration: Long = 350L,
+    body: FragmentTransaction.() -> Unit
+) {
     changeFragment(fragment) {
         val transitionSet = TransitionSet()
-        transitionSet.duration = 350L
+        transitionSet.duration = duration
         transitionSet.addTransition(
             TransitionInflater
                 .from(this@changeFragmentWithTransition)

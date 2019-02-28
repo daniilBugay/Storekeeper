@@ -23,11 +23,18 @@ class WatcherPresenter(
 ): MvpPresenter<WatcherView>() {
 
     private val jobs = mutableListOf<Job>()
+    private var isRefreshing = false
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
+        load()
+    }
+
+    private fun load(){
         val showTypesJob = showTypes()
         jobs.add(showTypesJob)
+        isRefreshing = true
+        viewState.showLoading()
         showTypesJob.start()
     }
 
@@ -38,6 +45,7 @@ class WatcherPresenter(
                 launch(Dispatchers.Main) { viewState.showItemTypes(types) }
                 types.firstOrNull()?.let { onItemTypeSelect(it) }
             } catch (e: IOException){
+                isRefreshing = false
                 launch(Dispatchers.Main) { processError(e) }
             }
         }
@@ -56,6 +64,8 @@ class WatcherPresenter(
                 launch(Dispatchers.Main) { viewState.showItemsWithRoom(roomsAndItems) }
             } catch (e: IOException){
                 launch(Dispatchers.Main) { processError(e)}
+            } finally {
+                isRefreshing = false
             }
         }
     }
@@ -91,5 +101,11 @@ class WatcherPresenter(
     fun onLogout(){
         userProvider.clear()
         viewState.logout()
+    }
+
+    fun refresh() {
+        if (isRefreshing) return
+        isRefreshing = true
+        load()
     }
 }

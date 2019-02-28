@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -35,6 +36,9 @@ class WatcherFragment : MvpAppCompatFragment(), WatcherView {
         }
     }
 
+    private val progressIndicator
+        get() = view?.findViewById<ProgressBar>(R.id.refreshProgressIndicator)
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_watcher, container, false)
     }
@@ -48,6 +52,8 @@ class WatcherFragment : MvpAppCompatFragment(), WatcherView {
             context, LinearLayoutManager.VERTICAL, false
         )
         logoutButton.setOnClickListener { watcherPresenter.onLogout() }
+        refreshButton.setOnClickListener { watcherPresenter.refresh() }
+
     }
 
     override fun showItemTypes(itemTypes: List<ItemType>) {
@@ -62,14 +68,20 @@ class WatcherFragment : MvpAppCompatFragment(), WatcherView {
             roomsAndItems = roomsAndItems,
             onItemStep = {watcherPresenter.onItemValueChange(it)}
         )
+        progressIndicator?.visibility = View.GONE
     }
 
     override fun showError(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+        progressIndicator?.visibility = View.GONE
     }
 
     override fun logout() {
         activity?.startActivity<MainActivity>()
         activity?.finish()
+    }
+
+    override fun showLoading() {
+        progressIndicator?.visibility = View.VISIBLE
     }
 }

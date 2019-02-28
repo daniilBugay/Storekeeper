@@ -1,5 +1,6 @@
 package technology.desoft.storekeeper.ui.adapter
 
+import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -26,12 +27,9 @@ class ItemLeftAdapter(
     }
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-
-
-
         fun bind(position: Int){
             val itemType = itemTypes[position]
-            Picasso.get().load(itemType.image).into(itemView.itemProductImage)
+            Picasso.get().load(Uri.parse(itemType.image)).into(itemView.itemProductImage)
             itemView.itemProductImage.setOnClickListener { onItemClick(itemType) }
         }
     }
