@@ -1,33 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:background="@color/colorPrimaryDark"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="0dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp">
+        android:layout_marginBottom="0dp" >
 
-    <TextView
-            android:transitionName="signLogo"
-            android:textColor="@color/colorPrimary"
-            android:layout_width="wrap_content"
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp">
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_refresh"
+                android:tint="@color/colorPrimary"
+                android:background="@color/colorPrimaryDark"
+                android:layout_gravity="start|center" />
+
+        <TextView
+                android:transitionName="signLogo"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/short_app_name"
+                android:textSize="24sp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                android:layout_gravity="center" />
+
+        <ImageButton
+                android:id="@+id/logoutButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_logout"
+                android:tint="@color/colorPrimary"
+                android:layout_margin="4dp"
+                android:background="@color/colorPrimaryDark"
+                android:layout_gravity="end|center_vertical" />
+
+    </FrameLayout>
+
+    <ProgressBar
+            android:id="@+id/refreshProgressIndicator"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:text="@string/short_app_name"
-            android:textSize="24sp"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-            android:layout_gravity="start|center_vertical"/>
+            android:indeterminate="true"
+            android:visibility="gone"
+            android:progressTint="@color/colorPrimary"
+            android:indeterminateTint="@color/colorPrimary"/>
 
-    <ImageButton
-            android:id="@+id/logoutButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_logout"
-            android:tint="@color/colorPrimary"
-            android:layout_margin="4dp"
-            android:background="@color/colorPrimaryDark"
-            android:layout_gravity="end|center_vertical"/>
-
-</FrameLayout>
+</LinearLayout>
