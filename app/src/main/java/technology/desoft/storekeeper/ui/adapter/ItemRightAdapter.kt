@@ -35,6 +35,7 @@ class ItemRightAdapter(
                 Picasso.get().load(type.image).fit().into(itemTypeImage)
                 typeAmountStepper.stepper.setValue(item.amount.roundToInt())
                 typeAmountStepper.stepper.setMin(0)
+                typeAmountStepper.stepper.setMax(99)
                 typeAmountStepper.stepper.addStepCallback(object: OnStepCallback {
                     override fun onStep(value: Int, positive: Boolean) {
                         onItemStep(item)

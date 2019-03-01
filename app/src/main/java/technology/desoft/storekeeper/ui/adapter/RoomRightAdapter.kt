@@ -34,6 +34,7 @@ class RoomRightAdapter(
                 roomNumberText.text = room.number
                 roomAmountStepper.stepper.setValue(item.amount.roundToInt())
                 roomAmountStepper.stepper.setMin(0)
+                roomAmountStepper.stepper.setMax(99)
                 roomAmountStepper.stepper.addStepCallback(object: OnStepCallback {
                     override fun onStep(value: Int, positive: Boolean) {
                         onItemStep(item)
