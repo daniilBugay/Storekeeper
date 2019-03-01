@@ -24,6 +24,7 @@ class WatcherPresenter(
 
     private val jobs = mutableListOf<Job>()
     private var isRefreshing = false
+    private lateinit var lastSelectedType: ItemType
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -34,7 +35,6 @@ class WatcherPresenter(
         val showTypesJob = showTypes()
         jobs.add(showTypesJob)
         isRefreshing = true
-        viewState.showLoading()
         showTypesJob.start()
     }
 
@@ -52,6 +52,7 @@ class WatcherPresenter(
     }
 
     fun onItemTypeSelect(type: ItemType){
+        lastSelectedType = type
         val showItemsJob = showItemsWithType(type)
         jobs.add(showItemsJob)
         showItemsJob.start()
@@ -106,6 +107,7 @@ class WatcherPresenter(
     fun refresh() {
         if (isRefreshing) return
         isRefreshing = true
-        load()
+        onItemTypeSelect(lastSelectedType)
+        viewState.showLoading()
     }
 }
