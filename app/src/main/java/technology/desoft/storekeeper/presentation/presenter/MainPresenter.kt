@@ -56,10 +56,6 @@ class MainPresenter(
         viewState.showLogin()
     }
 
-    private fun showRegistration(){
-        viewState.showRegistration()
-    }
-
     private fun showWatcherScreen(){
         GlobalScope.launch(Dispatchers.Main){
             viewState.showWatcherScreen()

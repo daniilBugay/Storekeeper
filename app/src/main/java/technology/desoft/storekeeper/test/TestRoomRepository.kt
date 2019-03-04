@@ -12,9 +12,7 @@ class TestRoomRepository: RoomRepository {
             Room(4, "410"),
             Room(5, "411"),
             Room(6, "412"),
-            Room(7, "413"),
-            Room(8, "414"),
-            Room(9, "415")
+            Room(7, "413")
         )
     }
 }

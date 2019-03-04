@@ -9,38 +9,45 @@
         android:layout_marginBottom="4dp"
         android:background="?android:attr/selectableItemBackground"
         app:cardBackgroundColor="@color/desoft_color_90"
-        app:cardCornerRadius="12dp">
+        app:cardCornerRadius="8dp">
 
     <android.support.v7.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:padding="16dp"
             android:layout_gravity="center">
 
-        <TextView
-                android:id="@+id/roomNumberText"
+        <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="24sp"
-                android:gravity="center|start"
-                android:drawableStart="@drawable/ic_room"
-                android:drawablePadding="5dp" />
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/roomNumberText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="24sp"
+                    android:layout_gravity="center"
+                    android:drawableStart="@drawable/ic_room"
+                    android:drawablePadding="5dp" />
+        </LinearLayout>
 
         <nl.dionsegijn.steppertouch.StepperTouch
                 android:id="@+id/roomAmountStepper"
                 android:layout_width="0dp"
-                android:layout_height="30dp"
+                android:layout_height="28dp"
                 android:layout_weight="2"
-                android:layout_gravity="center|end"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 app:stepperActionsColor="@color/colorPrimaryDark"
-                app:stepperBackgroundColor="@color/almost_desoft_color"
                 app:stepperActionsDisabledColor="@color/almost_desoft_color"
+                app:stepperBackgroundColor="@color/almost_desoft_color"
                 app:stepperButtonColor="@color/colorPrimary"
-                app:stepperTextColor="@color/colorPrimaryDark"
-                app:stepperTextSize="10sp">
+                app:stepperTextColor="@color/colorPrimaryDark">
 
         </nl.dionsegijn.steppertouch.StepperTouch>
 

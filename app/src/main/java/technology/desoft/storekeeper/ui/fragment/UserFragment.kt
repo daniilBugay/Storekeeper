@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -35,6 +36,9 @@ class UserFragment : MvpAppCompatFragment(), UserView {
         }
     }
 
+    private val progressIndicator
+        get() = view?.findViewById<ProgressBar>(R.id.refreshProgressIndicator)
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_user, container, false)
     }
@@ -48,6 +52,7 @@ class UserFragment : MvpAppCompatFragment(), UserView {
             context, LinearLayoutManager.VERTICAL, false
         )
         logoutButton.setOnClickListener { userPresenter.onLogout() }
+        refreshButton.setOnClickListener { userPresenter.refresh() }
     }
 
     override fun showRooms(rooms: List<Room>) {
@@ -62,14 +67,20 @@ class UserFragment : MvpAppCompatFragment(), UserView {
             itemsAndTypes = itemsAndTypes,
             onItemStep = {userPresenter.onItemValueChange(it)}
         )
+        progressIndicator?.visibility = View.GONE
     }
 
     override fun showError(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+        progressIndicator?.visibility = View.GONE
     }
 
     override fun logout() {
         activity?.startActivity<MainActivity>()
         activity?.finish()
+    }
+
+    override fun showLoading() {
+        progressIndicator?.visibility = View.VISIBLE
     }
 }

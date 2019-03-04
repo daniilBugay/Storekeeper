@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.card.MaterialCardView
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="80dp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/desoft_color_90"
+        app:cardCornerRadius="8dp">
 
     <android.support.v7.widget.LinearLayoutCompat
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center_vertical">
 
         <TextView
                 android:id="@+id/roomNumberText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textAlignment="center"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="24sp"
+                android:textColor="@color/colorPrimaryDark"/>
 
     </android.support.v7.widget.LinearLayoutCompat>
 

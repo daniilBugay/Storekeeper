@@ -53,7 +53,6 @@ class WatcherFragment : MvpAppCompatFragment(), WatcherView {
         )
         logoutButton.setOnClickListener { watcherPresenter.onLogout() }
         refreshButton.setOnClickListener { watcherPresenter.refresh() }
-
     }
 
     override fun showItemTypes(itemTypes: List<ItemType>) {

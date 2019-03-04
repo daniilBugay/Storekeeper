@@ -23,6 +23,8 @@ class UserPresenter(
 ): MvpPresenter<UserView>() {
 
     private val jobs = mutableListOf<Job>()
+    private var isRefreshing = false
+    private lateinit var lastSelectedRoom: Room
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -38,12 +40,14 @@ class UserPresenter(
                 launch(Dispatchers.Main) { viewState.showRooms(rooms) }
                 rooms.firstOrNull()?.let { onRoomSelected(it) }
             } catch (e: IOException) {
+                isRefreshing = false
                 launch(Dispatchers.Main) { processError(e) }
             }
         }
     }
 
     fun onRoomSelected(room: Room) {
+        lastSelectedRoom = room
         val showItemsJob = showItemsWithRoom(room)
         jobs.add(showItemsJob)
         showItemsJob.start()
@@ -56,6 +60,8 @@ class UserPresenter(
                 launch(Dispatchers.Main) { viewState.showItemsWithType(itemsAndTypes) }
             } catch (e: IOException) {
                 launch(Dispatchers.Main) { processError(e) }
+            } finally {
+                isRefreshing = false
             }
         }
     }
@@ -89,5 +95,12 @@ class UserPresenter(
     fun onLogout(){
         userProvider.clear()
         viewState.logout()
+    }
+
+    fun refresh() {
+        if (isRefreshing) return
+        isRefreshing = true
+        onRoomSelected(lastSelectedRoom)
+        viewState.showLoading()
     }
 }
