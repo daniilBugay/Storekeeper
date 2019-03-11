@@ -64,7 +64,7 @@ class WatcherPresenter(
                 val roomsAndItems = loadItemsWithType(itemType)
                 launch(Dispatchers.Main) { viewState.showItemsWithRoom(roomsAndItems) }
             } catch (e: IOException){
-                launch(Dispatchers.Main) { processError(e)}
+                launch(Dispatchers.Main) { processError(e) }
             } finally {
                 isRefreshing = false
             }

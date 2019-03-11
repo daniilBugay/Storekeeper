@@ -45,6 +45,7 @@ class WatcherFragment : MvpAppCompatFragment(), WatcherView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        showLoading()
         watcherLeftRecycler.layoutManager = LinearLayoutManager(
             context, LinearLayoutManager.VERTICAL, false
         )

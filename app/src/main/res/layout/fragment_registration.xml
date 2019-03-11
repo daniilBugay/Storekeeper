@@ -28,15 +28,12 @@
                 android:layout_centerVertical="true"
                 android:padding="@dimen/spacing_large">
 
-            <TextView
+            <ImageView
                     android:id="@+id/registerLogo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
                     android:layout_gravity="center_horizontal"
-                    android:text="@string/short_app_name"
-                    android:textSize="50sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorPrimary"
+                    android:src="@drawable/logo"
                     android:layout_marginBottom="@dimen/spacing_xlarge"
                     android:transitionName="signLogo"/>
 
@@ -46,7 +43,7 @@
                     android:text="@string/email"
                     android:textAlignment="center"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                    android:textColor="@color/blue_grey_300"
+                    android:textColor="@color/desoft_color"
                     android:textStyle="bold"
                     android:layout_marginStart="4dp" />
 
@@ -54,10 +51,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@color/blue_grey_300"
+                    app:passwordToggleTint="@color/desoft_color"
                     app:hintTextAppearance="@style/HintTextAppearance"
                     app:hintEnabled="false"
-                    android:textColorHint="@color/blue_grey_300"
+                    android:textColorHint="@color/desoft_color"
                     android:layout_marginBottom="@dimen/spacing_mlarge" >
 
                 <android.support.design.widget.TextInputEditText
@@ -68,7 +65,7 @@
                         android:maxLength="50"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:textColor="@color/blue_grey_300"
+                        android:textColor="@color/desoft_color"
                         android:inputType="textEmailAddress" />
             </android.support.design.widget.TextInputLayout>
 
@@ -78,7 +75,7 @@
                     android:text="@string/username"
                     android:textAlignment="center"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                    android:textColor="@color/blue_grey_300"
+                    android:textColor="@color/desoft_color"
                     android:textStyle="bold"
                     android:layout_marginStart="4dp" />
 
@@ -86,10 +83,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@color/blue_grey_300"
+                    app:passwordToggleTint="@color/desoft_color"
                     app:hintTextAppearance="@style/HintTextAppearance"
                     app:hintEnabled="false"
-                    android:textColorHint="@color/blue_grey_300"
+                    android:textColorHint="@color/desoft_color"
                     android:layout_marginBottom="@dimen/spacing_mlarge" >
 
                 <android.support.design.widget.TextInputEditText
@@ -100,7 +97,7 @@
                         android:maxLength="50"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:textColor="@color/blue_grey_300"
+                        android:textColor="@color/desoft_color"
                         android:inputType="textPersonName" />
             </android.support.design.widget.TextInputLayout>
 
@@ -110,7 +107,7 @@
                     android:text="@string/password"
                     android:textAlignment="center"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                    android:textColor="@color/blue_grey_300"
+                    android:textColor="@color/desoft_color"
                     android:textStyle="bold"
                     android:layout_marginStart="4dp"/>
 
@@ -118,10 +115,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@color/blue_grey_300"
+                    app:passwordToggleTint="@color/desoft_color"
                     app:hintTextAppearance="@style/HintTextAppearance"
                     app:hintEnabled="false"
-                    android:textColorHint="@color/blue_grey_300"
+                    android:textColorHint="@color/desoft_color"
                     android:layout_marginBottom="@dimen/spacing_middle" >
 
                 <android.support.design.widget.TextInputEditText
@@ -132,7 +129,7 @@
                         android:maxLength="50"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:textColor="@color/blue_grey_300"
+                        android:textColor="@color/desoft_color"
                         android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
 
@@ -143,7 +140,7 @@
                     android:text="@string/skeeper"
                     android:textStyle="bold"
                     android:buttonTint="@color/colorPrimary"
-                    android:textColor="@color/blue_grey_300"
+                    android:textColor="@color/desoft_color"
                     android:layout_marginBottom="@dimen/spacing_medium" />
 
             <android.support.design.button.MaterialButton
@@ -175,7 +172,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/back_to"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                        android:textColor="@color/blue_grey_300"
+                        android:textColor="@color/desoft_color"
                         android:layout_marginEnd="4dp"/>
 
                 <TextView

@@ -26,7 +26,8 @@ class ItemLeftAdapter(
         holder.bind(position)
     }
 
-    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+
         fun bind(position: Int){
             val itemType = itemTypes[position]
             Picasso.get().load(Uri.parse(itemType.image)).into(itemView.itemProductImage)
