@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_room_right.view.*
-import nl.dionsegijn.steppertouch.OnStepCallback
 import technology.desoft.storekeeper.R
 import technology.desoft.storekeeper.model.item.Item
 import technology.desoft.storekeeper.model.room.Room
+import technology.desoft.storekeeper.ui.view.Stepper
 import kotlin.math.roundToInt
 
 class RoomRightAdapter(
@@ -32,12 +32,11 @@ class RoomRightAdapter(
             val (room, item) = roomsAndItems[position]
             with(itemView){
                 roomNumberText.text = room.number
-                roomAmountStepper.stepper.setValue(item.amount.roundToInt())
-                roomAmountStepper.stepper.setMin(0)
-                roomAmountStepper.stepper.setMax(99)
-                roomAmountStepper.stepper.addStepCallback(object: OnStepCallback {
-                    override fun onStep(value: Int, positive: Boolean) {
+                roomAmountStepper.value = item.amount.roundToInt()
+                roomAmountStepper.setCallback(object: Stepper.Callback{
+                    override fun onStep(oldValue: Int, newValue: Int) {
                         onItemStep(item)
+                        item.amount = newValue.toDouble()
                     }
                 })
             }

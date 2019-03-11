@@ -5,4 +5,6 @@
     <dimen name="spacing_large">15dp</dimen>
     <dimen name="spacing_mlarge">20dp</dimen>
     <dimen name="spacing_xlarge">35dp</dimen>
+    <dimen name="card_view_default_elevation">2dp</dimen>
+    <dimen name="card_view_active_elevation">16dp</dimen>
 </resources>

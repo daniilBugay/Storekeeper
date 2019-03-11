@@ -24,7 +24,7 @@ class WatcherPresenter(
 
     private val jobs = mutableListOf<Job>()
     private var isRefreshing = false
-    private lateinit var lastSelectedType: ItemType
+    private var lastSelectedType: ItemType? = null
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -43,7 +43,7 @@ class WatcherPresenter(
             try {
                 val types = itemRepository.getItemTypes()
                 launch(Dispatchers.Main) { viewState.showItemTypes(types) }
-                types.firstOrNull()?.let { onItemTypeSelect(it) }
+                if (lastSelectedType == null) onItemTypeSelect(types.first())
             } catch (e: IOException){
                 isRefreshing = false
                 launch(Dispatchers.Main) { processError(e) }
@@ -52,6 +52,9 @@ class WatcherPresenter(
     }
 
     fun onItemTypeSelect(type: ItemType){
+        GlobalScope.launch(Dispatchers.Main) {
+            viewState.showLoading()
+        }
         lastSelectedType = type
         val showItemsJob = showItemsWithType(type)
         jobs.add(showItemsJob)
@@ -62,7 +65,7 @@ class WatcherPresenter(
         return GlobalScope.launch(Dispatchers.IO) {
             try {
                 val roomsAndItems = loadItemsWithType(itemType)
-                launch(Dispatchers.Main) { viewState.showItemsWithRoom(roomsAndItems) }
+                launch(Dispatchers.Main) { viewState.showItemsWithRoom(itemType, roomsAndItems) }
             } catch (e: IOException){
                 launch(Dispatchers.Main) { processError(e) }
             } finally {
@@ -107,7 +110,7 @@ class WatcherPresenter(
     fun refresh() {
         if (isRefreshing) return
         isRefreshing = true
-        onItemTypeSelect(lastSelectedType)
+        lastSelectedType?.let { onItemTypeSelect(it) }
         viewState.showLoading()
     }
 }

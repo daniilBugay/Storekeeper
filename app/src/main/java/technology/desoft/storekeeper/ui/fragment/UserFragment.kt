@@ -36,6 +36,7 @@ class UserFragment : MvpAppCompatFragment(), UserView {
         }
     }
 
+
     private val progressIndicator
         get() = view?.findViewById<ProgressBar>(R.id.refreshProgressIndicator)
 
@@ -63,11 +64,12 @@ class UserFragment : MvpAppCompatFragment(), UserView {
         )
     }
 
-    override fun showItemsWithType(itemsAndTypes: List<Pair<Item, ItemType>>) {
+    override fun showItemsWithType(selectedRoom: Room, itemsAndTypes: List<Pair<Item, ItemType>>) {
         userRightRecycler.adapter = ItemRightAdapter(
             itemsAndTypes = itemsAndTypes,
             onItemStep = {userPresenter.onItemValueChange(it)}
         )
+        (userLeftRecycler.adapter as RoomLeftAdapter).setSelectedType(selectedRoom)
         progressIndicator?.visibility = View.GONE
     }
 

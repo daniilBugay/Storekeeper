@@ -24,10 +24,14 @@ class UserPresenter(
 
     private val jobs = mutableListOf<Job>()
     private var isRefreshing = false
-    private lateinit var lastSelectedRoom: Room
+    private var lastSelectedRoom: Room? = null
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
+        load()
+    }
+
+    fun load(){
         val showTypesJob = showRooms()
         jobs.add(showTypesJob)
         showTypesJob.start()
@@ -38,7 +42,7 @@ class UserPresenter(
             try {
                 val rooms = roomRepository.getRooms()
                 launch(Dispatchers.Main) { viewState.showRooms(rooms) }
-                rooms.firstOrNull()?.let { onRoomSelected(it) }
+                if(lastSelectedRoom == null) onRoomSelected(rooms.first())
             } catch (e: IOException) {
                 isRefreshing = false
                 launch(Dispatchers.Main) { processError(e) }
@@ -47,6 +51,9 @@ class UserPresenter(
     }
 
     fun onRoomSelected(room: Room) {
+        GlobalScope.launch(Dispatchers.Main) {
+            viewState.showLoading()
+        }
         lastSelectedRoom = room
         val showItemsJob = showItemsWithRoom(room)
         jobs.add(showItemsJob)
@@ -57,7 +64,7 @@ class UserPresenter(
         return GlobalScope.launch(Dispatchers.IO) {
             try {
                 val itemsAndTypes = loadItemsAndType(room)
-                launch(Dispatchers.Main) { viewState.showItemsWithType(itemsAndTypes) }
+                launch(Dispatchers.Main) { viewState.showItemsWithType(room, itemsAndTypes) }
             } catch (e: IOException) {
                 launch(Dispatchers.Main) { processError(e) }
             } finally {
@@ -99,8 +106,8 @@ class UserPresenter(
 
     fun refresh() {
         if (isRefreshing) return
+        lastSelectedRoom?.let { onRoomSelected(it) }
         isRefreshing = true
-        onRoomSelected(lastSelectedRoom)
         viewState.showLoading()
     }
 }

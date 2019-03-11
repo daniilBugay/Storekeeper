@@ -16,4 +16,6 @@
     <string name="fields_empty_error">Fill in required fields</string>
     <string name="connection_error">Network connection error</string>
     <string name="change_item_error">Could not change item</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
 </resources>

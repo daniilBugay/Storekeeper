@@ -5,6 +5,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.CycleInterpolator
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatFragment
@@ -63,11 +65,12 @@ class WatcherFragment : MvpAppCompatFragment(), WatcherView {
         )
     }
 
-    override fun showItemsWithRoom(roomsAndItems: List<Pair<Room, Item>>) {
+    override fun showItemsWithRoom(itemType: ItemType, roomsAndItems: List<Pair<Room, Item>>) {
         watcherRightRecycler.adapter = RoomRightAdapter(
             roomsAndItems = roomsAndItems,
             onItemStep = {watcherPresenter.onItemValueChange(it)}
         )
+        (watcherLeftRecycler.adapter as ItemLeftAdapter).setSelectedType(itemType)
         progressIndicator?.visibility = View.GONE
     }
 
@@ -83,5 +86,9 @@ class WatcherFragment : MvpAppCompatFragment(), WatcherView {
 
     override fun showLoading() {
         progressIndicator?.visibility = View.VISIBLE
+        refreshButton.animate()
+            .rotationBy(360f)
+            .setInterpolator(AccelerateDecelerateInterpolator())
+            .start()
     }
 }

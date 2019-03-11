@@ -13,6 +13,7 @@ import technology.desoft.storekeeper.App
 import technology.desoft.storekeeper.R
 import technology.desoft.storekeeper.presentation.presenter.MainPresenter
 import technology.desoft.storekeeper.presentation.view.StartupView
+import technology.desoft.storekeeper.ui.changeFragment
 import technology.desoft.storekeeper.ui.changeFragmentWithTransition
 import technology.desoft.storekeeper.ui.fragment.LoginFragment
 import technology.desoft.storekeeper.ui.fragment.RegistrationFragment
@@ -61,30 +62,16 @@ class MainActivity : MvpAppCompatActivity(), StartupView {
     }
 
     override fun showUserScreen() {
-        val current = supportFragmentManager.fragments.firstOrNull()
         val userFragment = UserFragment()
-        changeFragmentWithTransition(userFragment, 500L){
-            val logo = current?.view?.findViewById(R.id.loginLogo)
-                ?: current?.view?.findViewById<View>(R.id.registerLogo)
-            if (logo != null){
-                addSharedElement(logo, logo.transitionName)
-            }
+        changeFragment(userFragment){
             userFragment.enterTransition = Explode()
-            current?.exitTransition = Slide(Gravity.BOTTOM)
         }
     }
 
     override fun showWatcherScreen() {
-        val current = supportFragmentManager.fragments.firstOrNull()
         val watcherFragment = WatcherFragment()
-        changeFragmentWithTransition(watcherFragment, 500L){
-            val logo = current?.view?.findViewById(R.id.loginLogo)
-                ?: current?.view?.findViewById<View>(R.id.registerLogo)
-            if (logo != null){
-                addSharedElement(logo, logo.transitionName)
-            }
+        changeFragment(watcherFragment){
             watcherFragment.enterTransition = Explode()
-            current?.exitTransition = Slide(Gravity.BOTTOM)
         }
     }
 

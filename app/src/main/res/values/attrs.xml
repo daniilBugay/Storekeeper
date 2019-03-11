@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Stepper">
+        <attr name="stepperColor" format="color"/>
+        <attr name="startValue" format="integer"/>
+        <attr name="buttonsColor" format="color"/>
+        <attr name="valueColor" format="color" />
+        <attr name="valueSize" format="dimension" />
+        <attr name="textSize" format="dimension"/>
+        <attr name="textColor" format="color"/>
+        <attr name="stepperCornerRadius" format="dimension"/>
+        <attr name="minValue" format="integer"/>
+        <attr name="maxValue" format="integer" />
+    </declare-styleable>
+</resources>

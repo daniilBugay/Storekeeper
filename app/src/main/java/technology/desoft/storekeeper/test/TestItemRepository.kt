@@ -13,7 +13,7 @@ class TestItemRepository : ItemRepository {
     )
 
     override suspend fun getItemsFromRoom(roomId: Long): List<Item> {
-        TimeUnit.SECONDS.sleep(1)
+        TimeUnit.MILLISECONDS.sleep(200)
         return items
     }
 
@@ -22,7 +22,7 @@ class TestItemRepository : ItemRepository {
     }
 
     override suspend fun getItemTypes(): List<ItemType> {
-        TimeUnit.SECONDS.sleep(1)
+        TimeUnit.MILLISECONDS.sleep(200)
         val image = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Oxygen480-apps-preferences-web-browser-cookies.svg/1024px-Oxygen480-apps-preferences-web-browser-cookies.svg.png"
 
         return List(10) {

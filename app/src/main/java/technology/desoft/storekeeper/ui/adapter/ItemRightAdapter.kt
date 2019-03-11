@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_product_right.view.*
-import nl.dionsegijn.steppertouch.OnStepCallback
 import technology.desoft.storekeeper.R
 import technology.desoft.storekeeper.model.item.Item
 import technology.desoft.storekeeper.model.item.ItemType
+import technology.desoft.storekeeper.ui.view.Stepper
 import kotlin.math.roundToInt
 
 class ItemRightAdapter(
@@ -33,12 +33,11 @@ class ItemRightAdapter(
             val (item, type) = itemsAndTypes[position]
             with(itemView){
                 Picasso.get().load(type.image).fit().into(itemTypeImage)
-                typeAmountStepper.stepper.setValue(item.amount.roundToInt())
-                typeAmountStepper.stepper.setMin(0)
-                typeAmountStepper.stepper.setMax(99)
-                typeAmountStepper.stepper.addStepCallback(object: OnStepCallback {
-                    override fun onStep(value: Int, positive: Boolean) {
+                typeAmountStepper.value = item.amount.roundToInt()
+                typeAmountStepper.setCallback(object: Stepper.Callback{
+                    override fun onStep(oldValue: Int, newValue: Int) {
                         onItemStep(item)
+                        item.amount = newValue.toDouble()
                     }
                 })
             }

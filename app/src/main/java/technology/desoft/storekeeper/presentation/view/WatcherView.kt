@@ -12,7 +12,7 @@ import technology.desoft.storekeeper.model.room.Room
 interface WatcherView: MvpView {
     fun showItemTypes(itemTypes: List<ItemType>)
     fun showError(message: String)
-    fun showItemsWithRoom(roomsAndItems: List<Pair<Room, Item>>)
+    fun showItemsWithRoom(itemType: ItemType, roomsAndItems: List<Pair<Room, Item>>)
     fun showLoading()
     fun logout()
 }

@@ -8,5 +8,5 @@ data class Item(
     val type: String,
     @SerializedName("room_id")
     val roomId: Long,
-    val amount: Double
+    var amount: Double
 )
