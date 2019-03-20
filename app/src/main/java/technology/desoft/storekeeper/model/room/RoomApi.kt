@@ -10,5 +10,5 @@ interface RoomApi {
     fun getRooms(
         @Header("ACCESS_TOKEN") tokenContent: String,
         @Header("USER_ID") userId: Long
-    ): Deferred<Response<List<Room>>>
+    ): Deferred<Response<Map<String, Room>>>
 }

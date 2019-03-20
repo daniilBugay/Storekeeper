@@ -31,7 +31,7 @@ class UserPresenter(
         load()
     }
 
-    fun load(){
+    private fun load(){
         val showTypesJob = showRooms()
         jobs.add(showTypesJob)
         showTypesJob.start()
@@ -63,7 +63,7 @@ class UserPresenter(
     private fun showItemsWithRoom(room: Room): Job {
         return GlobalScope.launch(Dispatchers.IO) {
             try {
-                val itemsAndTypes = loadItemsAndType(room)
+                val itemsAndTypes = loadItemsAndType(room).sortedBy {it.first.id}
                 launch(Dispatchers.Main) { viewState.showItemsWithType(room, itemsAndTypes) }
             } catch (e: IOException) {
                 launch(Dispatchers.Main) { processError(e) }
@@ -75,7 +75,13 @@ class UserPresenter(
 
     private suspend fun loadItemsAndType(room: Room): List<Pair<Item, ItemType>> {
         val items = itemRepository.getItemsFromRoom(room.id)
-        return items.map { it to itemRepository.getItemTypes().first { type -> type.name == it.type } }
+        val types = itemRepository.getItemTypes()
+        return items.map { item ->
+            val itemTypeName = types.find { it.id == item.typeId }?.name
+            item to types.first {
+                type -> type.name == itemTypeName
+            }
+        }
     }
 
     private fun processError(e: IOException) {

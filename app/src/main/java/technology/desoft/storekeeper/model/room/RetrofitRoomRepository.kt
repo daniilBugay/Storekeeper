@@ -28,7 +28,7 @@ class RetrofitRoomRepository(
             val response = api.getRooms(token.content, userId).await()
             val body = response.body()
             if (response.isSuccessful && body != null)
-                return body
+                return body.values.toList()
 
             throw IOException(response.message())
         } catch (e: UnknownHostException) {

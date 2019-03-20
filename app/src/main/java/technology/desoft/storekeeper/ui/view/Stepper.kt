@@ -98,7 +98,7 @@ class Stepper @JvmOverloads constructor(
                     dX = v.x - event.rawX
                 }
                 MotionEvent.ACTION_MOVE -> v.animate()
-                    .x(event.rawX + dX - v.width / 2)
+                    .x(event.rawX + dX)
                     .setDuration(0)
                     .start()
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> goToStartPosition()

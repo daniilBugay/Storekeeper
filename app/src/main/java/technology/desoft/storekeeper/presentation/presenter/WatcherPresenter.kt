@@ -76,8 +76,11 @@ class WatcherPresenter(
 
     private suspend fun loadItemsWithType(itemType: ItemType): List<Pair<Room, Item>> {
         val rooms = roomRepository.getRooms()
-        return rooms.map {
-            it to itemRepository.getItemsFromRoom(it.id).first { item -> item.type == itemType.name }
+        val itemsWithType = itemRepository.getItemsWithType(itemType)
+        return rooms.map { room ->
+            room to itemsWithType.first { item ->
+                item.roomId == room.id
+            }
         }
     }
 

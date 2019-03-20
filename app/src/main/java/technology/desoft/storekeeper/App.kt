@@ -6,6 +6,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import technology.desoft.storekeeper.model.item.ItemRepository
+import technology.desoft.storekeeper.model.item.RetrofitItemRepository
 import technology.desoft.storekeeper.model.room.RetrofitRoomRepository
 import technology.desoft.storekeeper.model.room.RoomRepository
 import technology.desoft.storekeeper.model.user.PreferenceUserProvider
@@ -17,8 +18,6 @@ import technology.desoft.storekeeper.model.user.token.TokenKeeper
 import technology.desoft.storekeeper.navigation.Router
 import technology.desoft.storekeeper.navigation.SimpleRouter
 import technology.desoft.storekeeper.presentation.view.StartupView
-import technology.desoft.storekeeper.test.TestItemRepository
-import technology.desoft.storekeeper.test.TestRoomRepository
 
 class App: Application() {
     lateinit var userRepository: UserRepository
@@ -44,7 +43,7 @@ class App: Application() {
         userProvider = PreferenceUserProvider(PreferenceManager.getDefaultSharedPreferences(this))
         startupRouter = SimpleRouter()
         userRepository = RetrofitUserRepository(retrofit, resources)
-        roomRepository = TestRoomRepository()//RetrofitRoomRepository(retrofit, tokenKeeper, resources)
-        itemRepository = TestItemRepository()//RetrofitItemRepository(retrofit, tokenKeeper, resources)
+        roomRepository = RetrofitRoomRepository(retrofit, tokenKeeper, resources)
+        itemRepository = RetrofitItemRepository(retrofit, tokenKeeper, resources)
     }
 }

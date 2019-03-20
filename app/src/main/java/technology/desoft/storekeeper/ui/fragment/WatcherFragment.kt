@@ -5,9 +5,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.CycleInterpolator
-import android.widget.ProgressBar
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -16,6 +13,7 @@ import kotlinx.android.synthetic.main.fragment_watcher.*
 import kotlinx.android.synthetic.main.toolbar_default.*
 import technology.desoft.storekeeper.App
 import technology.desoft.storekeeper.R
+import kotlinx.android.synthetic.main.fragment_watcher.view.refreshProgressIndicator
 import technology.desoft.storekeeper.model.item.Item
 import technology.desoft.storekeeper.model.item.ItemType
 import technology.desoft.storekeeper.model.room.Room
@@ -37,9 +35,6 @@ class WatcherFragment : MvpAppCompatFragment(), WatcherView {
             WatcherPresenter(itemRepository, roomRepository, userProvider)
         }
     }
-
-    private val progressIndicator
-        get() = view?.findViewById<ProgressBar>(R.id.refreshProgressIndicator)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_watcher, container, false)
@@ -71,12 +66,12 @@ class WatcherFragment : MvpAppCompatFragment(), WatcherView {
             onItemStep = {watcherPresenter.onItemValueChange(it)}
         )
         (watcherLeftRecycler.adapter as ItemLeftAdapter).setSelectedType(itemType)
-        progressIndicator?.visibility = View.GONE
+        view?.refreshProgressIndicator?.visibility = View.GONE
     }
 
     override fun showError(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
-        progressIndicator?.visibility = View.GONE
+        view?.refreshProgressIndicator?.visibility = View.GONE
     }
 
     override fun logout() {
@@ -85,10 +80,6 @@ class WatcherFragment : MvpAppCompatFragment(), WatcherView {
     }
 
     override fun showLoading() {
-        progressIndicator?.visibility = View.VISIBLE
-        refreshButton.animate()
-            .rotationBy(360f)
-            .setInterpolator(AccelerateDecelerateInterpolator())
-            .start()
+        view?.refreshProgressIndicator?.visibility = View.VISIBLE
     }
 }
