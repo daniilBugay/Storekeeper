@@ -23,6 +23,7 @@ import technology.desoft.storekeeper.ui.activity.MainActivity
 import technology.desoft.storekeeper.ui.adapter.ItemRightAdapter
 import technology.desoft.storekeeper.ui.adapter.RoomLeftAdapter
 import technology.desoft.storekeeper.ui.startActivity
+import kotlinx.android.synthetic.main.fragment_user.view.*
 
 class UserFragment : MvpAppCompatFragment(), UserView {
 
@@ -35,10 +36,6 @@ class UserFragment : MvpAppCompatFragment(), UserView {
             UserPresenter(itemRepository, roomRepository, userProvider)
         }
     }
-
-
-    private val progressIndicator
-        get() = view?.findViewById<ProgressBar>(R.id.refreshProgressIndicator)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_user, container, false)
@@ -70,12 +67,12 @@ class UserFragment : MvpAppCompatFragment(), UserView {
             onItemStep = {userPresenter.onItemValueChange(it)}
         )
         (userLeftRecycler.adapter as RoomLeftAdapter).setSelectedType(selectedRoom)
-        progressIndicator?.visibility = View.GONE
+        view?.refreshProgressIndicator?.visibility = View.GONE
     }
 
     override fun showError(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
-        progressIndicator?.visibility = View.GONE
+        view?.refreshProgressIndicator?.visibility = View.GONE
     }
 
     override fun logout() {
@@ -84,6 +81,6 @@ class UserFragment : MvpAppCompatFragment(), UserView {
     }
 
     override fun showLoading() {
-        progressIndicator?.visibility = View.VISIBLE
+        view?.refreshProgressIndicator?.visibility = View.VISIBLE
     }
 }

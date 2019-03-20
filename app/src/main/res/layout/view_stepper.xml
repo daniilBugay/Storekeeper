@@ -4,10 +4,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
         <TextView
                 android:elevation="0dp"
                 android:id="@+id/minusButton"
@@ -46,5 +42,4 @@
                 android:textSize="20sp"
                 android:textAlignment="textEnd"
                 android:layout_marginEnd="8dp"/>
-    </FrameLayout>
 </merge>
