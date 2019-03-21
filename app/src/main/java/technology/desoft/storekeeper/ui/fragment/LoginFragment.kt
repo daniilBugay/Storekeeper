@@ -21,7 +21,7 @@ class LoginFragment: MvpAppCompatFragment(), LoginView {
     @ProvidePresenter
     fun providePresenter(): LoginPresenter {
         return with(activity?.application as App) {
-            LoginPresenter(userRepository, tokenKeeper, userProvider, startupRouter)
+            LoginPresenter(userRepository, tokenKeeper, userProvider, mainRouter)
         }
     }
 

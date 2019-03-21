@@ -17,7 +17,7 @@ import technology.desoft.storekeeper.model.user.token.SimpleTokenKeeper
 import technology.desoft.storekeeper.model.user.token.TokenKeeper
 import technology.desoft.storekeeper.navigation.Router
 import technology.desoft.storekeeper.navigation.SimpleRouter
-import technology.desoft.storekeeper.presentation.view.StartupView
+import technology.desoft.storekeeper.presentation.view.MainView
 
 class App: Application() {
     lateinit var userRepository: UserRepository
@@ -25,7 +25,7 @@ class App: Application() {
     lateinit var userProvider: UserProvider
     lateinit var roomRepository: RoomRepository
     lateinit var itemRepository: ItemRepository
-    lateinit var startupRouter: Router<StartupView>
+    lateinit var mainRouter: Router<MainView>
 
     override fun onCreate() {
         super.onCreate()
@@ -41,7 +41,7 @@ class App: Application() {
     private fun initComponents(retrofit: Retrofit) {
         tokenKeeper = SimpleTokenKeeper()
         userProvider = PreferenceUserProvider(PreferenceManager.getDefaultSharedPreferences(this))
-        startupRouter = SimpleRouter()
+        mainRouter = SimpleRouter()
         userRepository = RetrofitUserRepository(retrofit, resources)
         roomRepository = RetrofitRoomRepository(retrofit, tokenKeeper, resources)
         itemRepository = RetrofitItemRepository(retrofit, tokenKeeper, resources)

@@ -1,5 +1,6 @@
 package technology.desoft.storekeeper.presentation.presenter
 
+import android.view.ViewTreeObserver
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import kotlinx.coroutines.Dispatchers
@@ -13,15 +14,15 @@ import technology.desoft.storekeeper.model.user.login.LoginUser
 import technology.desoft.storekeeper.model.user.token.TokenKeeper
 import technology.desoft.storekeeper.model.user.token.setTokenAndUserId
 import technology.desoft.storekeeper.navigation.Router
-import technology.desoft.storekeeper.presentation.view.StartupView
+import technology.desoft.storekeeper.presentation.view.MainView
 
 @InjectViewState
 class MainPresenter(
-    router: Router<StartupView>,
+    router: Router<MainView>,
     private val userRepository: UserRepository,
     private val provider: UserProvider,
     private val tokenKeeper: TokenKeeper
-): MvpPresenter<StartupView>(){
+): MvpPresenter<MainView>(){
 
     private val jobs = mutableListOf<Job>()
 
@@ -43,6 +44,7 @@ class MainPresenter(
 
     private fun loginAsync(email: String, password: String): Job {
         return GlobalScope.launch(Dispatchers.IO) {
+            showSplashScreen()
             val result = userRepository.login(LoginUser(email, password))
             tokenKeeper.setTokenAndUserId(result.tokenContent, result.userId)
             if (result.isKeeper)
@@ -65,6 +67,12 @@ class MainPresenter(
     private fun showUserScreen(){
         GlobalScope.launch(Dispatchers.Main){
             viewState.showUserScreen()
+        }
+    }
+
+    private fun showSplashScreen(){
+        GlobalScope.launch(Dispatchers.Main){
+            viewState.showSplashScreen()
         }
     }
 

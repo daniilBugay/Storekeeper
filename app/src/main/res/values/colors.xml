@@ -4,13 +4,14 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#999999</color>
 
-    <color name="desoft_color">#f3edc1</color>
+    <color name="desoft_color">#f4edbe</color>
     <color name="almost_desoft_color">#efe7a9</color>
-    <color name="desoft_color_90">#f7f3d4</color>
+    <color name="desoft_color_90">#fcf7cf</color>
     <color name="almost_black">#1a1a1a</color>
     <color name="grey_10">#e6e6e6</color>
     <color name="grey_60">#666666</color>
     <color name="green_500">#4CAF50</color>
     <color name="blue_600">#1E88E5</color>
     <color name="blue_grey_300">#90A4AE</color>
+    <color name="grey_30">#4d4d4d</color>
 </resources>

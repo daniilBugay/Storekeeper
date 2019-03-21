@@ -3,7 +3,7 @@
     <declare-styleable name="Stepper">
         <attr name="stepperColor" format="color"/>
         <attr name="startValue" format="integer"/>
-        <attr name="buttonsColor" format="color"/>
+        <attr name="buttonColor" format="color"/>
         <attr name="valueColor" format="color" />
         <attr name="valueSize" format="dimension" />
         <attr name="textSize" format="dimension"/>

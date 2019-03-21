@@ -2,8 +2,9 @@
 <android.support.design.card.MaterialCardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="80dp" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_height="80dp"
         android:gravity="center_vertical"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
@@ -18,14 +19,13 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:padding="8dp"
             android:layout_gravity="center">
 
         <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:layout_gravity="center"
+                android:layout_gravity="center_vertical"
                 android:orientation="vertical">
 
             <ImageView
@@ -42,14 +42,16 @@
                 android:layout_height="40dp"
                 android:layout_weight="2"
                 android:layout_gravity="center|end"
+                android:layout_marginEnd="16dp"
                 app:minValue="0"
                 app:maxValue="99"
                 app:stepperCornerRadius="32dp"
                 app:textSize="8sp"
-                app:buttonsColor="@color/colorPrimaryDark"
+                app:buttonColor="@color/colorPrimaryDark"
                 app:valueColor="@color/colorPrimary"
                 app:textColor="@color/colorPrimaryDark"
-                app:stepperColor="@color/almost_desoft_color" tools:ignore="SmallSp">
+                app:stepperColor="@color/almost_desoft_color"
+                tools:ignore="SmallSp">
         </technology.desoft.storekeeper.ui.view.Stepper>
 
 

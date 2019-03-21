@@ -8,7 +8,6 @@ import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.android.synthetic.main.fragment_registration.view.*
 import technology.desoft.storekeeper.App
 import technology.desoft.storekeeper.R
@@ -22,7 +21,7 @@ class RegistrationFragment: MvpAppCompatFragment(), RegistrationView {
     @ProvidePresenter
     fun providePresenter(): RegistrationPresenter {
         return with(activity?.application as App){
-            RegistrationPresenter(userRepository, tokenKeeper, userProvider, startupRouter)
+            RegistrationPresenter(userRepository, tokenKeeper, userProvider, mainRouter)
         }
     }
 

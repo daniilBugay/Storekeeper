@@ -3,8 +3,6 @@ package technology.desoft.storekeeper.ui.activity
 import android.os.Bundle
 import android.transition.Explode
 import android.transition.Fade
-import android.transition.Slide
-import android.view.Gravity
 import android.view.View
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -12,16 +10,13 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import technology.desoft.storekeeper.App
 import technology.desoft.storekeeper.R
 import technology.desoft.storekeeper.presentation.presenter.MainPresenter
-import technology.desoft.storekeeper.presentation.view.StartupView
+import technology.desoft.storekeeper.presentation.view.MainView
 import technology.desoft.storekeeper.ui.changeFragment
 import technology.desoft.storekeeper.ui.changeFragmentWithTransition
-import technology.desoft.storekeeper.ui.fragment.LoginFragment
-import technology.desoft.storekeeper.ui.fragment.RegistrationFragment
-import technology.desoft.storekeeper.ui.fragment.UserFragment
-import technology.desoft.storekeeper.ui.fragment.WatcherFragment
+import technology.desoft.storekeeper.ui.fragment.*
 
 
-class MainActivity : MvpAppCompatActivity(), StartupView {
+class MainActivity : MvpAppCompatActivity(), MainView {
 
     @InjectPresenter
     lateinit var mainPresenter: MainPresenter
@@ -29,7 +24,7 @@ class MainActivity : MvpAppCompatActivity(), StartupView {
     @ProvidePresenter
     fun providePresenter(): MainPresenter {
         return with(application as App) {
-            MainPresenter(startupRouter, userRepository, userProvider, tokenKeeper)
+            MainPresenter(mainRouter, userRepository, userProvider, tokenKeeper)
         }
     }
 
@@ -73,6 +68,11 @@ class MainActivity : MvpAppCompatActivity(), StartupView {
         changeFragment(watcherFragment){
             watcherFragment.enterTransition = Explode()
         }
+    }
+
+    override fun showSplashScreen() {
+        val splashScreenFragment = SplashScreenFragment()
+        changeFragment(splashScreenFragment) {}
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

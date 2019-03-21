@@ -30,11 +30,11 @@
 
             <ImageView
                     android:id="@+id/registerLogo"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/logo"
-                    android:layout_marginBottom="@dimen/spacing_xlarge"
+                    android:layout_marginBottom="@dimen/spacing_medium"
                     android:transitionName="signLogo"/>
 
             <TextView

@@ -1,10 +1,10 @@
 package technology.desoft.storekeeper.navigation.navigations
 
 import technology.desoft.storekeeper.navigation.Navigation
-import technology.desoft.storekeeper.presentation.view.StartupView
+import technology.desoft.storekeeper.presentation.view.MainView
 
-class LoginNavigation: Navigation<StartupView> {
-    override fun apply(view: StartupView) {
+class LoginNavigation: Navigation<MainView> {
+    override fun apply(view: MainView) {
         view.showLogin()
     }
 }

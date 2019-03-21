@@ -8,7 +8,6 @@ import technology.desoft.storekeeper.model.user.UserRepository
 import technology.desoft.storekeeper.model.user.login.LoginException
 import technology.desoft.storekeeper.model.user.login.LoginUser
 import technology.desoft.storekeeper.model.user.saveEmailAndPassword
-import technology.desoft.storekeeper.model.user.token.Token
 import technology.desoft.storekeeper.model.user.token.TokenKeeper
 import technology.desoft.storekeeper.model.user.token.setTokenAndUserId
 import technology.desoft.storekeeper.navigation.Router
@@ -16,14 +15,14 @@ import technology.desoft.storekeeper.navigation.navigations.RegistrationNavigati
 import technology.desoft.storekeeper.navigation.navigations.UserScreenNavigation
 import technology.desoft.storekeeper.navigation.navigations.WatcherScreenNavigation
 import technology.desoft.storekeeper.presentation.view.LoginView
-import technology.desoft.storekeeper.presentation.view.StartupView
+import technology.desoft.storekeeper.presentation.view.MainView
 
 @InjectViewState
 class LoginPresenter(
     private val userRepository: UserRepository,
     private val tokenKeeper: TokenKeeper,
     private val userProvider: UserProvider,
-    private val router: Router<StartupView>
+    private val router: Router<MainView>
 ) : MvpPresenter<LoginView>() {
 
     private val jobs: MutableList<Job> = mutableListOf()

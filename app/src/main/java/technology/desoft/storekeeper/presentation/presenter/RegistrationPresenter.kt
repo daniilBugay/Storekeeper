@@ -18,14 +18,14 @@ import technology.desoft.storekeeper.navigation.navigations.LoginNavigation
 import technology.desoft.storekeeper.navigation.navigations.UserScreenNavigation
 import technology.desoft.storekeeper.navigation.navigations.WatcherScreenNavigation
 import technology.desoft.storekeeper.presentation.view.RegistrationView
-import technology.desoft.storekeeper.presentation.view.StartupView
+import technology.desoft.storekeeper.presentation.view.MainView
 
 @InjectViewState
 class RegistrationPresenter(
     private val userRepository: UserRepository,
     private val tokenKeeper: TokenKeeper,
     private val userProvider: UserProvider,
-    private val router: Router<StartupView>
+    private val router: Router<MainView>
 ) : MvpPresenter<RegistrationView>() {
 
     private val jobs: MutableList<Job> = mutableListOf()

@@ -10,7 +10,7 @@
     <string name='confirm_password'>CONFIRM PASSWORD</string>
     <string name='new_user'>New user?</string>
     <string name="back_to">Back to</string>
-    <string name="skeeper">I AM SKEEPER!</string>
+    <string name="skeeper">I AM A SKEEPER!</string>
     <string name="invalid_login_error">Invalid login or password</string>
     <string name="registration_error">"User with this email already exists!"</string>
     <string name="fields_empty_error">Fill in required fields</string>

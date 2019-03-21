@@ -61,13 +61,13 @@ class Stepper @JvmOverloads constructor(
             R.styleable.Stepper_textColor, ContextCompat.getColor(context, android.R.color.black)
         )
         stepperValue.setTextColor(textColor)
-        val buttonsColor = styleArray.getColor(
-            R.styleable.Stepper_buttonsColor, ContextCompat.getColor(context, R.color.colorAccent)
+        val buttonColor = styleArray.getColor(
+            R.styleable.Stepper_buttonColor, ContextCompat.getColor(context, R.color.colorAccent)
         )
         val cornerRadius = styleArray.getDimension(R.styleable.Stepper_stepperCornerRadius, 8f)
         (background as GradientDrawable).cornerRadius = cornerRadius
-        minusButton.setTextColor(buttonsColor)
-        plusButton.setTextColor(buttonsColor)
+        minusButton.setTextColor(buttonColor)
+        plusButton.setTextColor(buttonColor)
         val valueColor = styleArray.getColor(
             R.styleable.Stepper_valueColor, ContextCompat.getColor(context, R.color.colorAccent)
         )
