@@ -3,10 +3,7 @@ package technology.desoft.storekeeper.presentation.presenter
 import android.view.ViewTreeObserver
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import technology.desoft.storekeeper.model.user.UserProvider
 import technology.desoft.storekeeper.model.user.UserRepository
 import technology.desoft.storekeeper.model.user.getEmailAndPassword
@@ -22,9 +19,7 @@ class MainPresenter(
     private val userRepository: UserRepository,
     private val provider: UserProvider,
     private val tokenKeeper: TokenKeeper
-): MvpPresenter<MainView>(){
-
-    private val jobs = mutableListOf<Job>()
+): CoroutineUserPresenter<MainView>(){
 
     init {
         router.setView(viewState)
@@ -34,16 +29,14 @@ class MainPresenter(
         super.onFirstViewAttach()
         val (email, password) = provider.getEmailAndPassword()
         if (email != null && password != null) {
-            val loginJob = loginAsync(email, password)
-            jobs.add(loginJob)
-            loginJob.start()
+            loginAsync(email, password)
             return
         }
         showLogin()
     }
 
-    private fun loginAsync(email: String, password: String): Job {
-        return GlobalScope.launch(Dispatchers.IO) {
+    private fun loginAsync(email: String, password: String) {
+        background.launch {
             showSplashScreen()
             val result = userRepository.login(LoginUser(email, password))
             tokenKeeper.setTokenAndUserId(result.tokenContent, result.userId)
@@ -58,26 +51,21 @@ class MainPresenter(
         viewState.showLogin()
     }
 
-    private fun showWatcherScreen(){
-        GlobalScope.launch(Dispatchers.Main){
+    private suspend fun showWatcherScreen(){
+        withContext(ui.coroutineContext) {
             viewState.showWatcherScreen()
         }
     }
 
-    private fun showUserScreen(){
-        GlobalScope.launch(Dispatchers.Main){
+    private suspend fun showUserScreen(){
+        withContext(ui.coroutineContext){
             viewState.showUserScreen()
         }
     }
 
-    private fun showSplashScreen(){
-        GlobalScope.launch(Dispatchers.Main){
+    private suspend fun showSplashScreen(){
+        withContext(ui.coroutineContext){
             viewState.showSplashScreen()
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        jobs.forEach(Job::cancel)
     }
 }

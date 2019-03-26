@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_refresh"
                 android:tint="@color/colorPrimary"
-                android:background="@color/colorPrimaryDark"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:layout_gravity="start|center"/>
 
         <TextView
@@ -39,7 +39,7 @@
                 android:src="@drawable/ic_logout"
                 android:tint="@color/colorPrimary"
                 android:layout_margin="4dp"
-                android:background="@color/colorPrimaryDark"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:layout_gravity="end|center_vertical"/>
 
     </FrameLayout>

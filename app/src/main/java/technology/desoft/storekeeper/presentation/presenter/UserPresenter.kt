@@ -2,10 +2,7 @@ package technology.desoft.storekeeper.presentation.presenter
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import technology.desoft.storekeeper.model.item.Item
 import technology.desoft.storekeeper.model.item.ItemRepository
 import technology.desoft.storekeeper.model.item.ItemType
@@ -20,9 +17,8 @@ class UserPresenter(
     private val itemRepository: ItemRepository,
     private val roomRepository: RoomRepository,
     private val userProvider: UserProvider
-): MvpPresenter<UserView>() {
+): CoroutineUserPresenter<UserView>() {
 
-    private val jobs = mutableListOf<Job>()
     private var isRefreshing = false
     private var lastSelectedRoom: Room? = null
 
@@ -32,41 +28,35 @@ class UserPresenter(
     }
 
     private fun load(){
-        val showTypesJob = showRooms()
-        jobs.add(showTypesJob)
-        showTypesJob.start()
+        showRooms()
     }
 
     private fun showRooms(): Job {
-        return GlobalScope.launch(Dispatchers.IO) {
+        return background.launch {
             try {
                 val rooms = roomRepository.getRooms()
-                launch(Dispatchers.Main) { viewState.showRooms(rooms) }
+                withContext(ui.coroutineContext) { viewState.showRooms(rooms) }
                 if(lastSelectedRoom == null) onRoomSelected(rooms.first())
             } catch (e: IOException) {
                 isRefreshing = false
-                launch(Dispatchers.Main) { processError(e) }
+                withContext(ui.coroutineContext) { processError(e) }
             }
         }
     }
 
     fun onRoomSelected(room: Room) {
-        GlobalScope.launch(Dispatchers.Main) {
-            viewState.showLoading()
-        }
+        ui.launch { viewState.showLoading() }
         lastSelectedRoom = room
-        val showItemsJob = showItemsWithRoom(room)
-        jobs.add(showItemsJob)
-        showItemsJob.start()
+        showItemsWithRoom(room)
     }
 
-    private fun showItemsWithRoom(room: Room): Job {
-        return GlobalScope.launch(Dispatchers.IO) {
+    private fun showItemsWithRoom(room: Room) {
+        background.launch {
             try {
-                val itemsAndTypes = loadItemsAndType(room).sortedBy {it.first.id}
-                launch(Dispatchers.Main) { viewState.showItemsWithType(room, itemsAndTypes) }
+                val itemsAndTypes = loadItemsAndType(room).sortedBy {it.second.name}
+                withContext(ui.coroutineContext) { viewState.showItemsWithType(room, itemsAndTypes) }
             } catch (e: IOException) {
-                launch(Dispatchers.Main) { processError(e) }
+                withContext(ui.coroutineContext) { processError(e) }
             } finally {
                 isRefreshing = false
             }
@@ -88,19 +78,12 @@ class UserPresenter(
         viewState.showError(e.message.toString())
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        jobs.forEach(Job::cancel)
-    }
-
     fun onItemValueChange(item: Item) {
-        val changeItemJob = changeItem(item)
-        jobs.add(changeItemJob)
-        changeItemJob.start()
+        changeItem(item)
     }
 
-    private fun changeItem(item: Item): Job {
-        return GlobalScope.launch {
+    private fun changeItem(item: Item) {
+        background.launch {
             itemRepository.changeItem(item)
         }
     }

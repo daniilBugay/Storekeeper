@@ -23,9 +23,8 @@ class LoginPresenter(
     private val tokenKeeper: TokenKeeper,
     private val userProvider: UserProvider,
     private val router: Router<MainView>
-) : MvpPresenter<LoginView>() {
+) : CoroutineUserPresenter<LoginView>() {
 
-    private val jobs: MutableList<Job> = mutableListOf()
     private var isLogin = false
 
     fun login(rawEmail: String, rawPassword: String) {
@@ -34,13 +33,11 @@ class LoginPresenter(
         val email = rawEmail.trim()
         val password = rawPassword.trim()
 
-        val loginJob = loginAsync(email, password)
-        jobs.add(loginJob)
-        loginJob.start()
+        loginAsync(email, password)
     }
 
-    private fun loginAsync(email: String, password: String): Job {
-        return GlobalScope.launch(Dispatchers.IO) {
+    private fun loginAsync(email: String, password: String) {
+        background.launch {
             try {
                 tryLogin(email, password)
             } catch (e: LoginException){
@@ -61,33 +58,26 @@ class LoginPresenter(
             showUserScreen()
     }
 
-    private fun showWatcherScreen() {
-        GlobalScope.launch(Dispatchers.Main) {
+    private suspend fun showWatcherScreen() {
+        withContext(ui.coroutineContext) {
             router.navigate(WatcherScreenNavigation())
         }
     }
 
-    private fun showUserScreen() {
-        GlobalScope.launch(Dispatchers.Main) {
+    private suspend fun showUserScreen() {
+        withContext(ui.coroutineContext) {
             router.navigate(UserScreenNavigation())
         }
     }
 
-    private fun processError(e: LoginException) {
-        val errorJob = GlobalScope.launch(Dispatchers.Main) {
+    private suspend fun processError(e: LoginException) {
+        withContext(ui.coroutineContext){
             viewState.showError(e.message.toString())
         }
-        jobs.add(errorJob)
-        errorJob.start()
         isLogin = false
     }
 
     fun goToRegistration(){
         router.navigate(RegistrationNavigation())
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        jobs.forEach(Job::cancel)
     }
 }

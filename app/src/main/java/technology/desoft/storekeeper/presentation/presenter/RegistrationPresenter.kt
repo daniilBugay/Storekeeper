@@ -2,10 +2,7 @@ package technology.desoft.storekeeper.presentation.presenter
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import technology.desoft.storekeeper.model.user.UserProvider
 import technology.desoft.storekeeper.model.user.UserRepository
 import technology.desoft.storekeeper.model.user.registration.RegistrationException
@@ -26,9 +23,8 @@ class RegistrationPresenter(
     private val tokenKeeper: TokenKeeper,
     private val userProvider: UserProvider,
     private val router: Router<MainView>
-) : MvpPresenter<RegistrationView>() {
+) : CoroutineUserPresenter<RegistrationView>() {
 
-    private val jobs: MutableList<Job> = mutableListOf()
     private var isRegistration = false
 
     fun register(rawEmail: String, rawUsername: String, rawPassword: String, isKeeper: Boolean) {
@@ -39,14 +35,11 @@ class RegistrationPresenter(
         val username = rawUsername.trim()
         val password = rawPassword.trim()
 
-        val registerJob = registerAsync(email, username, password, isKeeper)
-        jobs.add(registerJob)
-        registerJob.start()
-
+        registerAsync(email, username, password, isKeeper)
     }
 
-    private fun registerAsync(email: String, username: String, password: String, isKeeper: Boolean): Job {
-        return GlobalScope.launch(Dispatchers.IO) {
+    private fun registerAsync(email: String, username: String, password: String, isKeeper: Boolean) {
+        background.launch {
             try {
                 tryRegister(email, username, password, isKeeper)
             } catch (e: RegistrationException) {
@@ -67,21 +60,14 @@ class RegistrationPresenter(
             router.navigate(UserScreenNavigation())
     }
 
-    private fun processError(e: RegistrationException) {
-        val errorJob = GlobalScope.launch(Dispatchers.Main) {
+    private suspend fun processError(e: RegistrationException) {
+        withContext(ui.coroutineContext){
             viewState.showError(e.message.toString())
         }
-        jobs.add(errorJob)
-        errorJob.start()
         isRegistration = false
     }
 
     fun goToLogin() {
         router.navigate(LoginNavigation())
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        jobs.forEach(Job::cancel)
     }
 }

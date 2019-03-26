@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.BounceInterpolator
+import android.view.animation.OvershootInterpolator
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.view_stepper.view.*
@@ -112,9 +114,9 @@ class Stepper @JvmOverloads constructor(
     private fun goToStartPosition() {
         val v = stepperValue
         stepperValue.animate()
-            .x((this.width - v.width) / 2f - 12f)
-            .setDuration(300L)
-            .setInterpolator(AccelerateDecelerateInterpolator())
+            .x((this.width - v.width) / 2f)
+            .setDuration(700L)
+            .setInterpolator(OvershootInterpolator())
             .start()
         if (v.x + v.width / 2 < this.width / 3)
             value--

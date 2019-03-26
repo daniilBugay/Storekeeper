@@ -4,7 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:gravity="center_vertical"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="6dp"
@@ -24,7 +24,7 @@
         <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_weight="5"
                 android:layout_gravity="center_vertical"
                 android:orientation="vertical">
 
@@ -49,7 +49,6 @@
                         android:id="@+id/personNumberText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="3"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="16sp"
                         android:layout_gravity="start|center_horizontal"
@@ -63,14 +62,14 @@
         <technology.desoft.storekeeper.ui.view.Stepper
                 android:id="@+id/roomAmountStepper"
                 android:layout_width="0dp"
-                android:layout_height="32dp"
-                android:layout_weight="2"
+                android:layout_height="40dp"
+                android:layout_weight="4"
                 android:layout_gravity="center|end"
                 android:layout_marginEnd="16dp"
                 app:minValue="0"
                 app:maxValue="99"
                 app:stepperCornerRadius="32dp"
-                app:textSize="8sp"
+                app:textSize="5sp"
                 app:buttonColor="@color/colorPrimaryDark"
                 app:valueColor="@color/colorPrimary"
                 app:textColor="@color/colorPrimaryDark"

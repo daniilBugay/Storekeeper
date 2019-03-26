@@ -33,6 +33,7 @@ class RoomRightAdapter(
             with(itemView){
                 roomNumberText.text = room.number
                 roomAmountStepper.value = item.amount.roundToInt()
+                personNumberText.text = room.usersAmount.toString()
                 roomAmountStepper.setCallback(object: Stepper.Callback{
                     override fun onStep(oldValue: Int, newValue: Int) {
                         onItemStep(item)

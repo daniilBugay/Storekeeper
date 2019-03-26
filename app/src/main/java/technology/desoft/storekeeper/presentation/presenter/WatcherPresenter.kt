@@ -2,10 +2,7 @@ package technology.desoft.storekeeper.presentation.presenter
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import technology.desoft.storekeeper.model.item.Item
 import technology.desoft.storekeeper.model.item.ItemRepository
 import technology.desoft.storekeeper.model.item.ItemType
@@ -20,9 +17,8 @@ class WatcherPresenter(
     private val itemRepository: ItemRepository,
     private val roomRepository: RoomRepository,
     private val userProvider: UserProvider
-): MvpPresenter<WatcherView>() {
+): CoroutineUserPresenter<WatcherView>() {
 
-    private val jobs = mutableListOf<Job>()
     private var isRefreshing = false
     private var lastSelectedType: ItemType? = null
 
@@ -32,42 +28,38 @@ class WatcherPresenter(
     }
 
     private fun load(){
-        val showTypesJob = showTypes()
-        jobs.add(showTypesJob)
+        showTypes()
         isRefreshing = true
-        showTypesJob.start()
     }
 
-    private fun showTypes(): Job {
-        return GlobalScope.launch(Dispatchers.IO) {
+    private fun showTypes() {
+        background.launch {
             try {
                 val types = itemRepository.getItemTypes()
-                launch(Dispatchers.Main) { viewState.showItemTypes(types) }
+                withContext(ui.coroutineContext) { viewState.showItemTypes(types) }
                 if (lastSelectedType == null) onItemTypeSelect(types.first())
             } catch (e: IOException){
                 isRefreshing = false
-                launch(Dispatchers.Main) { processError(e) }
+                withContext(ui.coroutineContext) { processError(e) }
             }
         }
     }
 
     fun onItemTypeSelect(type: ItemType){
-        GlobalScope.launch(Dispatchers.Main) {
+        ui.launch(Dispatchers.Main) {
             viewState.showLoading()
         }
         lastSelectedType = type
-        val showItemsJob = showItemsWithType(type)
-        jobs.add(showItemsJob)
-        showItemsJob.start()
+        showItemsWithType(type)
     }
 
-    private fun showItemsWithType(itemType: ItemType): Job {
-        return GlobalScope.launch(Dispatchers.IO) {
+    private fun showItemsWithType(itemType: ItemType) {
+        background.launch {
             try {
-                val roomsAndItems = loadItemsWithType(itemType)
-                launch(Dispatchers.Main) { viewState.showItemsWithRoom(itemType, roomsAndItems) }
+                val roomsAndItems = loadItemsWithType(itemType).sortedBy { it.second.name }
+                withContext(ui.coroutineContext) { viewState.showItemsWithRoom(itemType, roomsAndItems) }
             } catch (e: IOException){
-                launch(Dispatchers.Main) { processError(e) }
+                withContext(ui.coroutineContext) { processError(e) }
             } finally {
                 isRefreshing = false
             }
@@ -88,19 +80,12 @@ class WatcherPresenter(
         viewState.showError(e.message.toString())
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        jobs.forEach(Job::cancel)
-    }
-
     fun onItemValueChange(item: Item) {
-        val changeItemJob = changeItem(item)
-        jobs.add(changeItemJob)
-        changeItemJob.start()
+        changeItem(item)
     }
 
-    private fun changeItem(item: Item): Job {
-        return GlobalScope.launch {
+    private fun changeItem(item: Item) {
+        background.launch {
             itemRepository.changeItem(item)
         }
     }
