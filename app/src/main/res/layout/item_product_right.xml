@@ -46,7 +46,7 @@
                 app:minValue="0"
                 app:maxValue="99"
                 app:stepperCornerRadius="32dp"
-                app:textSize="5sp"
+                app:textSize="6sp"
                 app:buttonColor="@color/colorPrimaryDark"
                 app:valueColor="@color/colorPrimary"
                 app:textColor="@color/colorPrimaryDark"

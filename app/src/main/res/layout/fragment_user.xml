@@ -25,7 +25,7 @@
                     android:layout_weight="1"
                     app:cardCornerRadius="12dp"
                     app:cardBackgroundColor="@color/desoft_color"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="16dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="4dp">
 
@@ -46,7 +46,7 @@
                     android:layout_weight="3"
                     app:cardCornerRadius="12dp"
                     app:cardBackgroundColor="@color/desoft_color"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="16dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="8dp">
 
@@ -62,6 +62,7 @@
             </android.support.design.card.MaterialCardView>
 
         </LinearLayout>
+
     </LinearLayout>
 
     <ProgressBar
@@ -76,5 +77,6 @@
             android:progressTint="@color/colorPrimary"
             android:indeterminateTint="@color/colorPrimary"
             android:layout_marginStart="6dp"
-            android:layout_marginEnd="6dp"/>
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="4dp"/>
 </FrameLayout>

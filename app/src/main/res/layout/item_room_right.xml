@@ -52,7 +52,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="16sp"
                         android:layout_gravity="start|center_horizontal"
-                        android:drawableStart="@drawable/ic_person"
+                        android:drawableStart="@drawable/ic_person1"
                         android:drawablePadding="4dp"
                         android:layout_marginStart="6dp"/>
             </LinearLayout>
@@ -69,7 +69,7 @@
                 app:minValue="0"
                 app:maxValue="99"
                 app:stepperCornerRadius="32dp"
-                app:textSize="5sp"
+                app:textSize="6sp"
                 app:buttonColor="@color/colorPrimaryDark"
                 app:valueColor="@color/colorPrimary"
                 app:textColor="@color/colorPrimaryDark"
