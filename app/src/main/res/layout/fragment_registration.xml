@@ -10,23 +10,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
-        <ProgressBar
-                android:id="@+id/registerProgressIndicator"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:indeterminate="true"
-                android:progressTint="@color/colorPrimary"
-                android:indeterminateTint="@color/colorPrimary"/>
-
         <LinearLayout
                 android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
-                android:padding="@dimen/spacing_large">
+                android:paddingStart="@dimen/spacing_large"
+                android:paddingEnd="@dimen/spacing_large"
+                android:paddingBottom="@dimen/spacing_large">
 
             <ImageView
                     android:id="@+id/registerLogo"
@@ -189,6 +181,17 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <ProgressBar
+                android:id="@+id/registerProgressIndicator"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:indeterminate="true"
+                android:progressTint="@color/colorPrimary"
+                android:indeterminateTint="@color/colorPrimary"
+                android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>
 

@@ -1,6 +1,7 @@
 package technology.desoft.storekeeper.ui.adapter
 
 import android.support.design.card.MaterialCardView
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -49,6 +50,11 @@ class RoomLeftAdapter(
             (itemView as MaterialCardView).cardElevation = itemView.resources.getDimension(
                 R.dimen.card_view_default_elevation
             )
+            itemView.apply {
+                scaleX = 1.0f
+                scaleY = 1.0f
+            }
+            itemView.setCardBackgroundColor(ContextCompat.getColor(itemView.context, R.color.desoft_color))
         }
 
         fun bindWithSelected(position: Int){
@@ -56,6 +62,11 @@ class RoomLeftAdapter(
             (itemView as MaterialCardView).cardElevation = itemView.resources.getDimension(
                 R.dimen.card_view_active_elevation
             )
+            itemView.apply {
+                scaleX = 1.07f
+                scaleY = 1.07f
+            }
+            itemView.setCardBackgroundColor(ContextCompat.getColor(itemView.context, R.color.desoft_color_90))
         }
     }
 }

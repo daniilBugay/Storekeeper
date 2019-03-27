@@ -76,8 +76,5 @@
             android:visibility="gone"
             android:foregroundGravity="bottom"
             android:progressTint="@color/colorPrimary"
-            android:indeterminateTint="@color/colorPrimary"
-            android:layout_marginStart="6dp"
-            android:layout_marginEnd="6dp"
-            android:layout_marginBottom="4dp"/>
+            android:indeterminateTint="@color/colorPrimary"/>
 </FrameLayout>

@@ -1,10 +1,9 @@
 package technology.desoft.storekeeper.ui.adapter
 
-import android.graphics.Color
+import android.content.res.ColorStateList
 import android.net.Uri
 import android.support.design.card.MaterialCardView
 import android.support.v4.content.ContextCompat
-import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_product_left.view.*
 import technology.desoft.storekeeper.R
 import technology.desoft.storekeeper.model.item.ItemType
-import kotlin.random.Random
+
 
 class ItemLeftAdapter(
     private val itemTypes: List<ItemType>,
@@ -26,7 +25,7 @@ class ItemLeftAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, type: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return ViewHolder(inflater.inflate(R.layout.item_product_left, parent, false))
+        return ViewHolder(inflater.inflate(technology.desoft.storekeeper.R.layout.item_product_left, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -53,15 +52,25 @@ class ItemLeftAdapter(
         fun bindWithoutSelection(position: Int){
             bind(position)
             (itemView as MaterialCardView).cardElevation = itemView.resources.getDimension(
-                R.dimen.card_view_default_elevation
+                technology.desoft.storekeeper.R.dimen.card_view_default_elevation
             )
+            itemView.apply{
+                scaleX = 1.0f
+                scaleY = 1.0f
+            }
+            itemView.setCardBackgroundColor(ContextCompat.getColor(itemView.context, R.color.desoft_color))
         }
 
         fun bindWithSelected(position: Int){
             bind(position)
             (itemView as MaterialCardView).cardElevation = itemView.resources.getDimension(
-                R.dimen.card_view_active_elevation
+                technology.desoft.storekeeper.R.dimen.card_view_active_elevation
             )
+            itemView.apply{
+                scaleX = 1.07f
+                scaleY = 1.07f
+            }
+            itemView.setCardBackgroundColor(ContextCompat.getColor(itemView.context, R.color.desoft_color_90))
         }
     }
 }
